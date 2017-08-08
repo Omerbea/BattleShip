@@ -8,6 +8,7 @@ public class Player {
         board[0][0] = new BattleShip();
         board[0][1] = new Mine();
         board[0][2] = null ;
+        board[0][3] = null ;
     }
 
 }
