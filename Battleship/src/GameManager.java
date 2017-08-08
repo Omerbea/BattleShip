@@ -1,7 +1,10 @@
+import GameParser.BattleShipGame;
+
 public class GameManager {
 
     public static void main(String [] args) {
         Parser p = new Parser();
-        p.ParseXML();
+        BattleShipGame b = p.GetParsedGame();
+        System.out.println();
     }
 }
