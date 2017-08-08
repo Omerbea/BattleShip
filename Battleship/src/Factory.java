@@ -14,8 +14,8 @@ public class Factory {
     public ArrayList<Player> CreatePlayers() throws Exception {
         //Validation pahse :
         try {
-            GameDataValidator.ValidateBoadSize(GameData.getBoardSize());
-            GameDataValidator.ValidateShipsType(GameData.getShipTypes().getShipType());
+            GameDataValidator.ValidateBoardSize(GameData.getBoardSize());
+            GameDataValidator.ValidateGameBoards(GameData.getBoards().getBoard());
         }
         catch (Exception e) {
             throw e ;
