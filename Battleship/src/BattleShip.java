@@ -2,7 +2,8 @@ final public class BattleShip extends GameTool {
 
     private String type;
     private int size;
-    public BattleShip (String i_species, String i_type, int i_size){
+    private char sign;
+    public BattleShip (String i_species, String i_type, int i_size, ){
         super(i_species);
         type = i_type;
         size = i_size;
@@ -19,5 +20,10 @@ final public class BattleShip extends GameTool {
             return true;
         }
         return false;
+    }
+
+    @Override
+    public char getMySing() {
+        return  this.sign;
     }
 }

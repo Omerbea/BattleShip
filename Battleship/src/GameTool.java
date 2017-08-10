@@ -12,6 +12,7 @@ public abstract class GameTool {
     }
 
     abstract public boolean updateHitMe();
+    abstract public char getMySing ();
 
 
 }

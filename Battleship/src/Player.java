@@ -7,39 +7,30 @@ import java.util.List;
 public class Player {
 
     GameTool[][] myBoard ;
-    int[][] rivalBoard ;
+    char[][] rivalBoard ;
     String Name ;
     int numOfShip;
     private  boolean isAlive;
+    private int size;
     /* name - player name
     size - size board
     newPlayreBoard -  is must be a valid before we call to the constractor*/
     public Player(String i_name, int i_size,  GameTool [][] i_newPlayerBoard, int i_numOfship) {
         Name = i_name;
         myBoard = i_newPlayerBoard;
-        rivalBoard = new int[i_size][i_size];
+        rivalBoard = new char[i_size][i_size];
         numOfShip = i_numOfship;
         isAlive = true;
+        size = i_size;
     }
 
     /* return "non" if no hit
     *  otherwise return the name of the GameTool : "mine" or "BattelShip"*/
-    public java.lang.String howFindThere(int row, int column){
+    public java.lang.String whoFindThere(int row, int column){
         if (myBoard[row][column] == null){
             return "non";
         }
-        java.lang.String species = myBoard[row][column].getSpecies();
-
-        if (species.equals("BattleShip")) {
-            return "BattleShip";
-        }
-        if (species.equals("Mine")){
-            return "Mine";
-        }
-        else{
-            System.out.print(("warnnig: isHit function insert to else condition..."));
-            return  "non";
-        }
+        return myBoard[row][column].getSpecies();
     }
 
     public void updateHitMe (int row, int column){
@@ -77,8 +68,33 @@ public class Player {
 
     public void updateIHit (int row, int column){
         updateStatistics(row, column , true);
+        updateRivalBoard (row,column);
     }
-    
+
+
+    private boolean updateRivalBoard (int row, int column){
+        if (rivalBoard[row][column] != 0){
+            System.out.print("warnnig: updateRivalBoard - rivalBoard[row][column] not empty cell");
+            return  false;
+        }
+        rivalBoard[row][column] = 'X';
+        return true;
+    }
+
+    public char [][] getMyBoardForPrint() {
+        char [][] boardForPrint = new char[this.size][this.size];
+        for (int row =0 ; row< size ; row++){
+            for (int column =0 ; column < size ; column++){
+                boardForPrint[row][column] = this.myBoard[row][column].getMySing();
+            }
+        }
+        return  boardForPrint;
+    }
+
+    public char[][] getRivalBoard() {
+        return rivalBoard;
+    }
+
     /* just for testing
     public void boardtest() {
         board[0][0] = new BattleShip();
