@@ -13,13 +13,13 @@ public class Parser {
         return ParsedGame;
     }
 
-    Parser() {
+    Parser() throws Exception {
         ParseXML();
     }
 
 
 
-    private void ParseXML() {
+    private void ParseXML() throws Exception {
         try {
 
             File file = new File("resources\\battleShip_5_basic.xml");
@@ -30,7 +30,7 @@ public class Parser {
 
 
         } catch (JAXBException e) {
-            //e.printStackTrace();
+            throw new Exception("File Cannot be Parsed by JAXB");
         }
     }
 }

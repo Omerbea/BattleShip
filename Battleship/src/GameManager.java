@@ -13,9 +13,8 @@ public class GameManager {
 //        }
 //
 //        System.out.println();
-
-        Validator v = new Validator();
-        v.ValidateUserMove("     A111 222   333                 4");
+        Factory f = new Factory();
+        f.CreatePlayers();
 
     }
 }

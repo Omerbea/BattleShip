@@ -1,4 +1,4 @@
-public class Mine extends GameTool {
+public class Mine  {
 
 
 }
