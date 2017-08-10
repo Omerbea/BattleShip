@@ -15,6 +15,10 @@ public class Factory {
         GameDataValidator = new Validator(parsedGame.GetParsedGame().getBoardSize());
     }
 
+    public Validator getGameDataValidator() {
+        return GameDataValidator;
+    }
+
     public Player[] createPlayers() throws Exception {
         //Validation pahse :
         try {

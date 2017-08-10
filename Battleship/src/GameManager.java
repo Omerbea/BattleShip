@@ -10,8 +10,8 @@ public class GameManager {
     private  Factory factory ;
     private Player []players;
     private int whoPlay =0;
-
-    UserInterface userInterface = new UserInterface();
+    private Validator validator ;
+    private UserInterface userInterface = new UserInterface();
     public GameManager(){
         setMainMenu();
     }
@@ -40,7 +40,6 @@ public class GameManager {
         this.mainMenu.add("quit game"); //8
     }
     private void start(){
-
         this.userInterface.printMenu(mainMenu,"middle", 1);
         char input = this.userInterface.waitForInput();
         while (true){
@@ -49,9 +48,9 @@ public class GameManager {
                     break;
                 case '2': this.gameStart();
                     break;
-                case '3':
+                case '3': this.showStatusGame();
                     break;
-                case '4':
+                case '4': excecuteMove();
                     break;
                 case '5':
                     break;
@@ -66,17 +65,49 @@ public class GameManager {
         }
     }
 
+    private  boolean excecuteMove(){
+        if (!this.isGameRun){
+            //ERROR:
+            //TODO: implement - returrn current massage
+            return false;
+        }
+
+    }
+
     private  boolean gameStart(){
-        userInterface.printBaordsAndMenu(players[whoPlay].getMyBoardForPrint(),players[whoPlay].getRivalBoard(), this.mainMenu );
+        if (! this.isGameLoaded){
+            //ERROR: the game not loaded.
+            //TODO: implement return relevant massage
+        }
+        this.showStatusGame();
+        this.isGameRun = true;
+        return  true;
+    }
+
+    private boolean showStatusGame (){
+        if (! this.isGameRun){
+            //TODO: return relevent massage
+            return false;
+        }
+        try {
+            userInterface.printBaordsAndMenu(players[whoPlay].getName() ,players[whoPlay].getMyBoardForPrint(),players[whoPlay].getRivalBoard(), players[whoPlay].getScore(), this.mainMenu );
+        }
+        catch (Exception e){
+            return  false;
+        }
+        return  true;
+
     }
 
     private boolean loadGame (){
-        if (isGameRun){
+        if (this.isGameRun){
             //TODO: present error to the ui and back to the loop
         }
         try{
             factory = new Factory();
-            this.players = factory.CreatePlayers();
+            this.players = factory.createPlayers();
+            this.validator = factory.getGameDataValidator();
+            this.isGameLoaded = true;
             return true;
         }
         catch (Exception e){

@@ -27,7 +27,7 @@ public class UserInterface {
         return 'c';
     }
 
-    public void printBaordsAndMenu( char[][] baordOne, char[][]BoardTwo, List<String> menu){
+    public void printBaordsAndMenu( String name,char[][] baordOne, char[][]BoardTwo,int score, List<String> menu){
 
     }
 }

@@ -9,9 +9,19 @@ public class Player {
     int numOfShip;
     private  boolean isAlive;
     private int size;
+    private int score = 0;
+
+    public String getName() {
+        return Name;
+    }
+
+    public int getScore() {
+        return score;
+    }
+
     /* name - player name
-    size - size board
-    newPlayreBoard -  is must be a valid before we call to the constractor*/
+        size - size board
+        newPlayreBoard -  is must be a valid before we call to the constractor*/
     public Player(String i_name, int i_size,  GameTool [][] i_newPlayerBoard, int i_numOfship) {
         Name = i_name;
         myBoard = i_newPlayerBoard;
