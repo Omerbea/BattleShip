@@ -1,16 +1,21 @@
 import GameParser.BattleShipGame;
 
+import java.lang.reflect.Array;
 import java.util.List;
 
 public class GameManager {
     private List<String> mainMenu ;
     private  boolean isGameRun = false;
-    private  Factory factory = new Factory();
+    private  boolean isGameLoaded = false;
+    private  Factory factory ;
+    private Player []players;
+    private int whoPlay =0;
+
     UserInterface userInterface = new UserInterface();
     public GameManager(){
         setMainMenu();
     }
-    public static void main(String [] args) {
+    public static void main(String [] args) throws Exception {
         Parser p = new Parser();
         BattleShipGame b = p.GetParsedGame();
 
@@ -25,14 +30,14 @@ public class GameManager {
     }
 
     private void  setMainMenu(){
-        mainMenu.add("read file");  //1
-        mainMenu.add("start game"); //2
-        mainMenu.add("state game"); //3
-        mainMenu.add("play your turn"); //4
-        mainMenu.add("statistics"); //5
-        mainMenu.add("restart"); //6
-        mainMenu.add("add mine"); //7
-        mainMenu.add("quit game"); //8
+        this.mainMenu.add("read file");  //1
+        this.mainMenu.add("start game"); //2
+        this.mainMenu.add("state game"); //3
+        this.mainMenu.add("play your turn"); //4
+        this.mainMenu.add("statistics"); //5
+        this.mainMenu.add("restart"); //6
+        this.mainMenu.add("add mine"); //7
+        this.mainMenu.add("quit game"); //8
     }
     private void start(){
 
@@ -40,18 +45,9 @@ public class GameManager {
         char input = this.userInterface.waitForInput();
         while (true){
             switch (input){
-                case '1':
-                    if (isGameRun){
-                        //TODO: present error to the ui and back to the loop
-                    }
-                    try{
-                         factory.
-                    }
-                    catch (Exception e){
-
-                    }
+                case '1': this.loadGame();
                     break;
-                case '2':
+                case '2': this.gameStart();
                     break;
                 case '3':
                     break;
@@ -67,6 +63,24 @@ public class GameManager {
                     break;
 
             }
+        }
+    }
+
+    private  boolean gameStart(){
+        userInterface.printBaordsAndMenu(players[whoPlay].getMyBoardForPrint(),players[whoPlay].getRivalBoard(), this.mainMenu );
+    }
+
+    private boolean loadGame (){
+        if (isGameRun){
+            //TODO: present error to the ui and back to the loop
+        }
+        try{
+            factory = new Factory();
+            this.players = factory.CreatePlayers();
+            return true;
+        }
+        catch (Exception e){
+            //TODO: handle with the exceptions
         }
     }
 

@@ -26,4 +26,8 @@ public class UserInterface {
     public char waitForInput() {
 
     }
+
+    public void printBaordsAndMenu( char[][] baordOne, char[][]BoardTwo, List<String> menu){
+
+    }
 }
