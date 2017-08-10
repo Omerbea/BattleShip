@@ -8,7 +8,7 @@ public class UserInterface {
      * true if success , false otherwise.
      * */
     public boolean printMenu(List<String> options, String style) {
-
+        return true ;
     }
 
     /* PARAMS
@@ -19,11 +19,11 @@ public class UserInterface {
      * true if success , false otherwise.
      * */
     public boolean printMenu(List<String> options, String Style, int startFrom) {
-
+        return false ;
     }
 
     //listing to keybaord and return the input
     public char waitForInput() {
-
+        return 'c';
     }
 }

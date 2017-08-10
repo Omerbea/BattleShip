@@ -3,20 +3,20 @@ import GameParser.BattleShipGame;
 import java.util.List;
 
 public class GameManager {
-    private List<String> mainMenu ;
+    /*private List<String> mainMenu ;
     private  boolean isGameRun = false;
     private  Factory factory = new Factory();
     UserInterface userInterface = new UserInterface();
-    public GameManager(){
+    public GameManager() throws Exception {
         setMainMenu();
     }
-    public static void main(String [] args) {
+    public static void main(String [] args) throws Exception {
         Parser p = new Parser();
         BattleShipGame b = p.GetParsedGame();
 
         Factory f = new Factory();
         try {
-            f.CreatePlayers();
+            f.createPlayers();
         } catch (Exception e) {
             System.out.printf(e.getMessage());
         }
@@ -45,7 +45,7 @@ public class GameManager {
                         //TODO: present error to the ui and back to the loop
                     }
                     try{
-                         factory.
+                         //factory.
                     }
                     catch (Exception e){
 
@@ -68,7 +68,10 @@ public class GameManager {
 
             }
         }
+    }*/
+    public static void main(String [] args) throws Exception {
+        Factory f = new Factory();
+        f.createPlayers();
+
     }
-
-
 }
