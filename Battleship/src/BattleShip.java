@@ -9,6 +9,10 @@ final public class BattleShip extends GameTool {
         size = i_size;
     }
 
+    public int getShipSize() {
+        return size;
+    }
+
     /*return true if the ship distroyed*/
     public boolean updateHitMe() {
         if (size == 0 ){

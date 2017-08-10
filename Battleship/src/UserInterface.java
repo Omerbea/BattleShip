@@ -7,7 +7,7 @@ public class UserInterface {
      * RETURN
      * true if success , false otherwise.
      * */
-    public boolean printMenu (List<String> options, String style){
+    public boolean printMenu(List<String> options, String style) {
 
     }
 
@@ -18,11 +18,12 @@ public class UserInterface {
      * RETURN
      * true if success , false otherwise.
      * */
-    public boolean printMenu (List<String> options, String Style, int startFrom ){
+    public boolean printMenu(List<String> options, String Style, int startFrom) {
 
     }
+
     //listing to keybaord and return the input
-    public char waitForInput(){
+    public char waitForInput() {
 
     }
 }
