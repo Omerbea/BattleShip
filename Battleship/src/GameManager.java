@@ -71,16 +71,16 @@ public class GameManager {
         }
     }
 
-    private  boolean excecuteMove(){
-        if (!this.isGameRun){
+    private  boolean excecuteMove() {
+        if (!this.isGameRun) {
             //ERROR:
             //TODO: implement - returrn current massage
             return false;
         }
-        userInterface.printMassage
-        return false;
-    }
 
+        return true;
+
+    }
     private  boolean gameStart(){
         if (! this.isGameLoaded){
             //ERROR: the game not loaded.
@@ -120,6 +120,8 @@ public class GameManager {
         catch (Exception e){
             //TODO: handle with the exceptions
         }
+
+
         return false;
     }
 
