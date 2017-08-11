@@ -1,10 +1,13 @@
 import GameParser.BattleShipGame;
+import sun.applet.Main;
 
 import java.lang.reflect.Array;
+import java.util.ArrayList;
 import java.util.List;
 
+
 public class GameManager {
-    private List<String> mainMenu ;
+    private ArrayList<String> mainMenu = new ArrayList<>();
     private  boolean isGameRun = false;
     private  boolean isGameLoaded = false;
     private  Factory factory ;
@@ -16,17 +19,20 @@ public class GameManager {
         setMainMenu();
     }
     public static void main(String [] args) throws Exception {
+        /*
         Parser p = new Parser();
         BattleShipGame b = p.GetParsedGame();
 
         Factory f = new Factory();
         try {
-            f.CreatePlayers();
+            f.createPlayers();
         } catch (Exception e) {
             System.out.printf(e.getMessage());
         }
 
-        System.out.println();
+        System.out.println();(*/
+        GameManager gameManager = new GameManager();
+        gameManager.start();
     }
 
     private void  setMainMenu(){
@@ -71,7 +77,8 @@ public class GameManager {
             //TODO: implement - returrn current massage
             return false;
         }
-
+        userInterface.printMassage
+        return false;
     }
 
     private  boolean gameStart(){
@@ -113,7 +120,9 @@ public class GameManager {
         catch (Exception e){
             //TODO: handle with the exceptions
         }
+        return false;
     }
 
 
 }
+
