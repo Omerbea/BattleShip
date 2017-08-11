@@ -21,7 +21,7 @@ public class GameManager {
 
         Factory f = new Factory();
         try {
-            f.CreatePlayers();
+            f.createPlayers();
         } catch (Exception e) {
             System.out.printf(e.getMessage());
         }
@@ -71,6 +71,7 @@ public class GameManager {
             //TODO: implement - returrn current massage
             return false;
         }
+        return true ;
 
     }
 
@@ -113,6 +114,8 @@ public class GameManager {
         catch (Exception e){
             //TODO: handle with the exceptions
         }
+
+        return false;
     }
 
 

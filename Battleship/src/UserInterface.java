@@ -1,13 +1,23 @@
 import java.util.List;
 
 public class UserInterface {
-    /* PARAMS
+
+    private int boardSize ;
+
+    UserInterface(int boardSize) {
+        this.boardSize = boardSize ;
+    }
+
+        /* PARAMS
      * optins: list of all the lines that should to present
      * style: where and how to menu should to present. for right now we support only 'middel' style
      * RETURN
      * true if success , false otherwise.
      * */
+
     public boolean printMenu(List<String> options, String style) {
+
+        int
         return true ;
     }
 
