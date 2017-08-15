@@ -4,6 +4,7 @@ import sun.applet.Main;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 
 public class GameManager {
@@ -47,7 +48,7 @@ public class GameManager {
         while (true) {
 
             try {
-                input = this.userInterface.getUserInput();
+                input = this.userInterface.getMenuOption();
             } catch (Exception e) {
                 //send it to the console
                 System.out.println("Please enter number");
@@ -56,8 +57,14 @@ public class GameManager {
             switch (input) {
                 case 1:
                     this.loadGame();
-                    this.userInterface.printMenu(mainMenu, "middel");
                     this.userInterface.printMassage("your file loaded...");
+                    try {
+                        TimeUnit.SECONDS.sleep(1);
+                    } catch (InterruptedException e) {
+                        e.printStackTrace();
+                    }
+                    this.userInterface.printMenu(mainMenu, "middel");
+
                     break;
                 case 2:
                     this.gameStart();
