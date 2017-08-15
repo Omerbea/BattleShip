@@ -52,7 +52,7 @@ public class Factory {
     }
 
     private void setBoard(int column, int row, GameTool[][] board, String shipDirection, String shipTypeId) {
-        BattleShip bship = new BattleShip("Ship" ,shipTypeId ,getShipSizeByType(shipTypeId));
+        BattleShip bship = new BattleShip("Ship" ,shipTypeId ,getShipSizeByType(shipTypeId) , '#');
         int numberOfIterations = 0;
         int tempCol = column ;
         int tempRow = row ;

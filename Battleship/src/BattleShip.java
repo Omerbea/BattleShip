@@ -1,9 +1,8 @@
 final public class BattleShip extends GameTool {
 
     private int size;
-    private char sign;
-    public BattleShip (String i_species, String i_type, int i_size){
-        super(i_species , i_type);
+    public BattleShip (String i_species, String i_type, int i_size , char i_sign ){
+        super(i_species , i_type , i_sign);
         size = i_size;
     }
 
