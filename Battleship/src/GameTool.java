@@ -1,9 +1,13 @@
 
 public abstract class GameTool {
-    String species;
+    private String species;
+    private String type;
 
-    public  GameTool (String i_species){
+
+    public  GameTool (String i_species , String i_type){
         species = i_species;
+        type = i_type ;
+
     }
 
 
