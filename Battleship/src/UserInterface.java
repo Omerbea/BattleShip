@@ -83,6 +83,7 @@ public class UserInterface {
             for (column = 0; column < boardSize; column++) {
                 System.out.printf(" %c", boardOne[column][row]);
             }
+            System.out.printf("\n");
         }
         System.out.printf("\n");
 
@@ -93,6 +94,7 @@ public class UserInterface {
             for (column = 0; column < boardSize; column++) {
                 System.out.printf(" %c", boardOne[column][row]);
             }
+            System.out.printf("\n");
         }
         System.out.printf("\n");
 
