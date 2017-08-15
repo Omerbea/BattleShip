@@ -20,9 +20,6 @@ public class GameManager {
     }
 
     public static void main(String [] args) throws Exception {
-        Parser p = new Parser();
-        BattleShipGame b = p.GetParsedGame();
-
         Factory f = new Factory();
         try {
             f.createPlayers();
@@ -30,7 +27,6 @@ public class GameManager {
             System.out.printf(e.getMessage());
         }
 
-        System.out.println();
         GameManager gameManager = new GameManager();
         gameManager.start();
     }
@@ -60,6 +56,8 @@ public class GameManager {
             switch (input) {
                 case 1:
                     this.loadGame();
+                    this.userInterface.printMenu(mainMenu, "middel");
+                    this.userInterface.printMassage("your file loaded...");
                     break;
                 case 2:
                     this.gameStart();
@@ -68,7 +66,7 @@ public class GameManager {
                     this.showStatusGame();
                     break;
                 case 4:
-                    excecuteMove();
+                    this.excecuteMove();
                     break;
                 case 5:
                     break;
@@ -119,10 +117,12 @@ public class GameManager {
     private  void changePlayer (){
         whoPlay = 1- whoPlay;
     }
+
     private  boolean gameStart(){
         if (! this.isGameLoaded){
             //ERROR: the game not loaded.
             //TODO: implement return relevant massage
+            this.userInterface.printMassage("no file loaded, please try option 1 befre you try to start game..");
         }
         this.showStatusGame();
         this.isGameRun = true;

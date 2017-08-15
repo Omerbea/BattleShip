@@ -103,7 +103,12 @@ public class Player {
         char [][] boardForPrint = new char[this.size][this.size];
         for (int row =0 ; row< size ; row++){
             for (int column =0 ; column < size ; column++){
-                boardForPrint[row][column] = this.myBoard[row][column].getMySing();
+                if (this.myBoard[row][column] != null) {
+                    boardForPrint[row][column] = this.myBoard[row][column].getMySing();
+                }
+                else{
+                    boardForPrint[row][column] = ' ';
+                }
             }
         }
         return  boardForPrint;

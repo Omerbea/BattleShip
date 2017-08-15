@@ -36,7 +36,7 @@ public class UserInterface {
     }
 
     /* PARAMS
-     * optins: list of all the lines that should to present
+     * optins: list of all the lines that should to presentx
      * style: where and how to menu should to present. for right now we support only 'middel' style
      * startFrom : the defult the first options start from 0. if you want something else, like to start form 1 set startFrom to 1 shoul
      * RETURN
