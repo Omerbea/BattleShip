@@ -1,3 +1,4 @@
+import java.util.ArrayList;
 import java.util.List;
 
 public class UserInterface {
@@ -35,5 +36,17 @@ public class UserInterface {
 
     public void printBaordsAndMenu( String name,char[][] baordOne, char[][]BoardTwo,int score, List<String> menu){
 
+    }
+
+    public String waitForStringInput() { return  "sdf";}
+
+    public ArrayList <Integer> waitForCoordinates() {
+       ArrayList <Integer> coordinates = new ArrayList<Integer> ();
+       coordinates.add((1));
+       coordinates.add((2));
+       return  coordinates;
+    }
+    public boolean printMassage(String msg){
+        return  true;
     }
 }

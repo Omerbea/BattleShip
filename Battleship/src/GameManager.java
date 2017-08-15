@@ -77,6 +77,18 @@ public class GameManager {
             //TODO: implement - returrn current massage
             return false;
         }
+        userInterface.printMassage("player: " + players[whoPlay].getName() + " please insert coordinates");
+        ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
+        String gameTool = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
+        switch (gameTool){
+            case "non":
+                break;
+            case "BattleShip":
+                break;
+            case  "Mine":
+                break;
+
+        }
 
         return true;
 
