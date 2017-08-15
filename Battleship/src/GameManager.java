@@ -47,7 +47,7 @@ public class GameManager {
         while (true) {
 
             try {
-                input = this.userInterface.getUserInput();
+                input = this.userInterface.getMenuOption();
             } catch (Exception e) {
                 //send it to the console
                 System.out.println("Please enter number");

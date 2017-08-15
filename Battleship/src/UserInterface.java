@@ -65,7 +65,7 @@ public class UserInterface {
         return scanner.nextInt();
     }
 
-    public void printBaordsAndMenu(String name, char[][] boardOne, char[][] BoardTwo, int score, List<String> menu) {
+    public void printBaordsAndMenu(String name, char[][] boardOne, char[][] boardTwo, int score, List<String> menu) {
 
 
         int row = 0;
@@ -74,25 +74,26 @@ public class UserInterface {
 
 
         printMenu(menu , "");
-        printTopRaw();
 
         System.out.println("Player Board :");
+        printTopRaw();
         for (; row < boardSize; row++) {
 
             System.out.printf(Integer.toString(row + 1));
             for (column = 0; column < boardSize; column++) {
-                System.out.printf(" %c", boardOne[column][row]);
+                System.out.printf(" %c", boardOne[row][column]);
             }
             System.out.printf("\n");
         }
         System.out.printf("\n");
 
         System.out.println("Rival Board :");
+        printTopRaw();
         for (row = 0; row < boardSize; row++) {
 
             System.out.printf(Integer.toString(row + 1));
             for (column = 0; column < boardSize; column++) {
-                System.out.printf(" %c", boardOne[column][row]);
+                System.out.printf(" %c", boardTwo[row][column]);
             }
             System.out.printf("\n");
         }
