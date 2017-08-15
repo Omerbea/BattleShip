@@ -41,7 +41,7 @@ public class Player {
     }
 
     public void updateHitMe (int row, int column){
-        updateStatistics (row, column, true);
+        updateStatisticsHitMe (row, column);
         boolean distroyShip =  myBoard[row][column].updateHitMe();
         if (distroyShip){
             numOfShip--;
@@ -56,35 +56,46 @@ public class Player {
         //TODO: implement
     }
 
-    private  void updateStatisticIHit ( int row, int column){
+    private  void updateStatisticIHit ( int row, int column, String typeGameTool){
         //TODO: implement
     }
 
-    private  void updateStatistics (int row, int clolumn, boolean iHit){
+    private  void updateStatisticsMyTurn (int row, int clolumn, boolean iHit, String typeGameTool){
         if (iHit){
-            updateStatisticIHit(row, clolumn);
+            updateStatisticIHit(row, clolumn , typeGameTool);
         }
         else{
             updateStatisticsHitMe(row,clolumn);
         }
     }
 
+    public boolean updateIMissMyTurn (int row, int column ){
+        updateStatisticsMyTurn(row, column, false, null);
+        updateRivalBoard(row, column, false);
+        return  true;
+    }
+
     public  boolean getIsAlive (){
         return  isAlive;
     }
 
-    public void updateIHit (int row, int column){
-        updateStatistics(row, column , true);
-        updateRivalBoard (row,column);
+    public void updateIHitMyTurn (int row, int column, String typeGameTool){
+        updateStatisticsMyTurn(row, column , true, typeGameTool);
+        updateRivalBoard (row,column, true);
     }
 
 
-    private boolean updateRivalBoard (int row, int column){
+    private boolean updateRivalBoard (int row, int column, boolean iHit){
         if (rivalBoard[row][column] != 0){
             System.out.print("warnnig: updateRivalBoard - rivalBoard[row][column] not empty cell");
             return  false;
         }
-        rivalBoard[row][column] = 'X';
+        if (iHit) {
+            rivalBoard[row][column] = 'X';
+        }
+        else {
+            rivalBoard[row][column] = '-';
+        }
         return true;
     }
 

@@ -32,7 +32,7 @@ public class UserInterface {
     }
 
     public  ArrayList <Integer> waitForCoordinates (){
-        return  new ArrayList<Integer>();6
+        return  new ArrayList<Integer>();
     }
 
     /* PARAMS

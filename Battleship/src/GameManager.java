@@ -95,19 +95,29 @@ public class GameManager {
         }
         userInterface.printMassage("player: " + players[whoPlay].getName() + " please insert coordinates");
         ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
-        String gameTool = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
-        switch (gameTool){
+        String gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
+        switch (gameToolType){
             case "non":
-                break;
+                players[whoPlay].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
+                this.changePlayer();
+                return true;
             case "BattleShip":
+                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType);
+                userInterface.printMassage("You hit! your turn...");
+
                 break;
             case  "Mine":
+                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType);
                 break;
 
         }
 
         return true;
 
+    }
+
+    private  void changePlayer (){
+        whoPlay = 1- whoPlay;
     }
     private  boolean gameStart(){
         if (! this.isGameLoaded){
