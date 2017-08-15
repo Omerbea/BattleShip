@@ -1,8 +1,8 @@
-import java.util.List;
+import java.util.*;
 
 public class UserInterface {
 
-    private int boardSize ;
+    private int boardSize = 5;
 
 
         /* PARAMS
@@ -14,7 +14,16 @@ public class UserInterface {
 
     public boolean printMenu(List<String> options, String style) {
 
-        return true ;
+        int optionNumber = 1;
+
+        System.out.println("Menu :");
+        for (String option : options) {
+            System.out.printf("%d. %s \n\r", optionNumber, option);
+            optionNumber++;
+        }
+        System.out.println();
+        System.out.println("Please Enter your choice : ");
+        return true;
     }
 
     /* PARAMS
@@ -25,15 +34,49 @@ public class UserInterface {
      * true if success , false otherwise.
      * */
     public boolean printMenu(List<String> options, String Style, int startFrom) {
-        return false ;
+
+        return false;
     }
 
     //listing to keybaord and return the input
-    public char waitForInput() {
-        return 'c';
+    public int getUserInput() {
+        Scanner scanner = new Scanner(System.in);
+        return scanner.nextInt();
     }
 
-    public void printBaordsAndMenu( String name,char[][] baordOne, char[][]BoardTwo,int score, List<String> menu){
+    public void printBaordsAndMenu(String name, char[][] boardOne, char[][] BoardTwo, int score, List<String> menu) {
 
+
+        int row = 0;
+        int column = 0;
+        //char[][] board = new char[5][5];
+
+        printTopRaw();
+
+
+        for (; row < boardSize; row++) {
+
+            System.out.printf(Integer.toString(row + 1));
+            for (column = 0; column < boardSize; column++) {
+                System.out.printf(" %c", boardOne[column][row]);
+            }
+        }
+        System.out.printf("\n");
     }
+
+
+    private void printTopRaw() {
+
+        String row = new String("  ");
+        int rowEnd = boardSize + 65;
+        char letter = 0;
+
+        for(int i = 65 ; i < rowEnd ; i++ ) {
+            letter = (char)i ;
+            row = row.concat(Character.toString(letter) + " ");
+        }
+
+        System.out.println(row);
+    }
+
 }

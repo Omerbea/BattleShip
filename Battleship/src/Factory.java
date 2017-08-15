@@ -34,10 +34,6 @@ public class Factory {
             GameTool[][] board = initPlayerBoard(GameData.getBoards().getBoard().get(player).getShip());
             PlayersArray[player] = new Player("Player" + (player + 1), GameData.getBoardSize(), board, GameData.getBoards().getBoard().get(player).getShip().size());
 
-            //FOR TESTING
-            //System.out.println("Board player number " + PlayersArray[player].getName());
-            //printb(board);
-            //
         }
         return PlayersArray;
     }

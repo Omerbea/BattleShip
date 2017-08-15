@@ -18,8 +18,8 @@ public class GameManager {
     public GameManager(){
         setMainMenu();
     }
+
     public static void main(String [] args) throws Exception {
-        /*
         Parser p = new Parser();
         BattleShipGame b = p.GetParsedGame();
 
@@ -30,7 +30,7 @@ public class GameManager {
             System.out.printf(e.getMessage());
         }
 
-        System.out.println();(*/
+        System.out.println();
         GameManager gameManager = new GameManager();
         gameManager.start();
     }
@@ -38,38 +38,50 @@ public class GameManager {
     private void  setMainMenu(){
         this.mainMenu.add("read file");  //1
         this.mainMenu.add("start game"); //2
-        this.mainMenu.add("state game"); //3
-        this.mainMenu.add("play your turn"); //4
-        this.mainMenu.add("statistics"); //5
-        this.mainMenu.add("restart"); //6
-        this.mainMenu.add("add mine"); //7
-        this.mainMenu.add("quit game"); //8
+        this.mainMenu.add("play your turn"); //3
+        this.mainMenu.add("statistics"); //4
+        this.mainMenu.add("restart"); //5
+        this.mainMenu.add("add mine"); //6
+        this.mainMenu.add("quit game"); //7
     }
     private void start(){
-        this.userInterface.printMenu(mainMenu,"middle", 1);
-        char input = this.userInterface.waitForInput();
-        while (true){
-            switch (input){
-                case '1': this.loadGame();
-                    break;
-                case '2': this.gameStart();
-                    break;
-                case '3': this.showStatusGame();
-                    break;
-                case '4': excecuteMove();
-                    break;
-                case '5':
-                    break;
-                case '6':
-                    break;
-                case '7':
-                    break;
-                case '8':
-                    break;
+        //this.userInterface.printMenu(mainMenu,"middle");
+        int input = -1 ;
+        this.showStatusGame();
 
+/*        while (true){
+
+            try{
+            input = this.userInterface.getUserInput();}
+            catch (Exception e) {
+                //send it to the console
+                System.out.println("Please enter number" );
             }
+
+            switch (input){
+                case 1: this.loadGame();
+                    break;
+                case 2: this.gameStart();
+                    break;
+                case 3: this.showStatusGame();
+                    break;
+                case 4: excecuteMove();
+                    break;
+                case 5:
+                    break;
+                case 6:
+                    System.out.println("option 6");
+                    break;
+                case 7:
+                    break;
+                default:
+                    // send it to the console
+                    System.out.println("Please choose number 1-7");
+
+
+            }*/
         }
-    }
+
 
     private  boolean excecuteMove() {
         if (!this.isGameRun) {
@@ -92,10 +104,10 @@ public class GameManager {
     }
 
     private boolean showStatusGame (){
-        if (! this.isGameRun){
+/*        if (! this.isGameRun){
             //TODO: return relevent massage
             return false;
-        }
+        }*/
         try {
             userInterface.printBaordsAndMenu(players[whoPlay].getName() ,players[whoPlay].getMyBoardForPrint(),players[whoPlay].getRivalBoard(), players[whoPlay].getScore(), this.mainMenu );
         }
