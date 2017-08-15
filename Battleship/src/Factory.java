@@ -71,8 +71,8 @@ public class Factory {
     }
 
     private void printb(GameTool[][] board) {
-        for(int i = 0 ; i < 5 ; i++) {
-            for (int j = 0 ; j < 5 ; j++) {
+        for(int i = 0 ; i < GameData.getBoardSize() ; i++) {
+            for (int j = 0 ; j < GameData.getBoardSize(); j++) {
                 if(board[i][j] == null) {
                 System.out.printf("0");
                 } else {
