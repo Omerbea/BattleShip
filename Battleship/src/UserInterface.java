@@ -3,7 +3,7 @@ import java.util.*;
 
 public class UserInterface {
 
-    private int boardSize = 5;
+    private int boardSize = -1;
 
 
         /* PARAMS
@@ -28,15 +28,27 @@ public class UserInterface {
     }
 
     public boolean printMassage (String msg){
+
+        System.out.println(msg);
         return  true;
     }
 
     public  ArrayList <Integer> waitForCoordinates (){
-        return  new ArrayList<Integer>();
+
+        Scanner scanner = new Scanner(System.in);
+        int row = scanner.nextInt();
+        int column = scanner.nextInt();
+        column -= 'A';
+
+        ArrayList<Integer> coordinates = new ArrayList<Integer>();
+        coordinates.add(row);
+        coordinates.add(column);
+
+        return coordinates;
     }
 
     /* PARAMS
-     * optins: list of all the lines that should to presentx
+     * optins: list of all the lines that should to present
      * style: where and how to menu should to present. for right now we support only 'middel' style
      * startFrom : the defult the first options start from 0. if you want something else, like to start form 1 set startFrom to 1 shoul
      * RETURN
@@ -48,7 +60,7 @@ public class UserInterface {
     }
 
     //listing to keybaord and return the input
-    public int getUserInput() {
+    public int getMenuOption() {
         Scanner scanner = new Scanner(System.in);
         return scanner.nextInt();
     }
@@ -58,19 +70,35 @@ public class UserInterface {
 
         int row = 0;
         int column = 0;
-        //char[][] board = new char[5][5];
+        boardSize = boardOne[0].length;
 
+
+        printMenu(menu , "");
         printTopRaw();
 
-
+        System.out.println("Player Board :");
         for (; row < boardSize; row++) {
 
             System.out.printf(Integer.toString(row + 1));
             for (column = 0; column < boardSize; column++) {
                 System.out.printf(" %c", boardOne[column][row]);
             }
+            System.out.printf("\n");
         }
         System.out.printf("\n");
+
+        System.out.println("Rival Board :");
+        for (row = 0; row < boardSize; row++) {
+
+            System.out.printf(Integer.toString(row + 1));
+            for (column = 0; column < boardSize; column++) {
+                System.out.printf(" %c", boardOne[column][row]);
+            }
+            System.out.printf("\n");
+        }
+        System.out.printf("\n");
+
+        System.out.printf("Current Score : %d \n" , score);
     }
 
 
