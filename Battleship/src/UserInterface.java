@@ -1,3 +1,4 @@
+import javax.swing.*;
 import java.util.*;
 
 public class UserInterface {
@@ -24,6 +25,14 @@ public class UserInterface {
         System.out.println();
         System.out.println("Please Enter your choice : ");
         return true;
+    }
+
+    public boolean printMassage (String msg){
+        return  true;
+    }
+
+    public  ArrayList <Integer> waitForCoordinates (){
+        return  new ArrayList<Integer>();6
     }
 
     /* PARAMS

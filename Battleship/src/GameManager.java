@@ -44,28 +44,31 @@ public class GameManager {
         this.mainMenu.add("add mine"); //6
         this.mainMenu.add("quit game"); //7
     }
-    private void start(){
-        //this.userInterface.printMenu(mainMenu,"middle");
-        int input = -1 ;
-        this.showStatusGame();
+    private void start() {
+        this.userInterface.printMenu(mainMenu,"middle");
+        int input = -1;
 
-/*        while (true){
+        while (true) {
 
-            try{
-            input = this.userInterface.getUserInput();}
-            catch (Exception e) {
+            try {
+                input = this.userInterface.getUserInput();
+            } catch (Exception e) {
                 //send it to the console
-                System.out.println("Please enter number" );
+                System.out.println("Please enter number");
             }
 
-            switch (input){
-                case 1: this.loadGame();
+            switch (input) {
+                case 1:
+                    this.loadGame();
                     break;
-                case 2: this.gameStart();
+                case 2:
+                    this.gameStart();
                     break;
-                case 3: this.showStatusGame();
+                case 3:
+                    this.showStatusGame();
                     break;
-                case 4: excecuteMove();
+                case 4:
+                    excecuteMove();
                     break;
                 case 5:
                     break;
@@ -79,8 +82,9 @@ public class GameManager {
                     System.out.println("Please choose number 1-7");
 
 
-            }*/
+            }
         }
+    }
 
 
     private  boolean excecuteMove() {
