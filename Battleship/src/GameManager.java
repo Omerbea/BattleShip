@@ -149,7 +149,6 @@ public class GameManager {
     private  boolean excecuteMove() {
 
 
-        long startTime = System.currentTimeMillis();
 
         if (!this.isGameRun) {
             this.handleWithErrorNoGame("no game run...");
@@ -157,7 +156,12 @@ public class GameManager {
 
         gameStatistic.incrementTurn();
         userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates");
+        long startTime = System.currentTimeMillis();
         ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
+        //Validator
+        long finishTime = System.currentTimeMillis();
+        long deltaTime = finishTime - startTime ;
+        players[whoPlay].setAvargeTimeTurn(deltaTime);
         ArrayList <String> gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
         switch (gameToolType.get(0)){
             case "non":
@@ -177,9 +181,7 @@ public class GameManager {
         }
 
 
-        long finishTime = System.currentTimeMillis();
-        long deltaTime = finishTime - startTime ;
-        players[whoPlay].setAvargeTimeTurn(deltaTime);
+
 
         return true;
 
