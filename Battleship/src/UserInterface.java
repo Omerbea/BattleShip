@@ -80,7 +80,7 @@ public class UserInterface {
         printTopRaw();
         for (; row < boardSize; row++) {
 
-            System.out.printf(Integer.toString(row + 1));
+            System.out.printf(Integer.toString(row ));
             for (column = 0; column < boardSize; column++) {
                 System.out.printf(" %c", boardOne[row][column]);
             }
@@ -92,7 +92,7 @@ public class UserInterface {
         printTopRaw();
         for (row = 0; row < boardSize; row++) {
 
-            System.out.printf(Integer.toString(row + 1));
+            System.out.printf(Integer.toString(row));
             for (column = 0; column < boardSize; column++) {
                 System.out.printf(" %c", boardTwo[row][column]);
             }
