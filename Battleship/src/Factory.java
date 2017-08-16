@@ -52,7 +52,7 @@ public class Factory {
     }
 
     private void setBoard(int column, int row, GameTool[][] board, String shipDirection, String shipTypeId) {
-        BattleShip bship = new BattleShip("Ship" ,shipTypeId ,getShipSizeByType(shipTypeId) , '#');
+        BattleShip bship = new BattleShip("Ship" ,shipTypeId ,getShipSizeByType(shipTypeId) , '#' , getScoreByShipTypeId(shipTypeId));
         int numberOfIterations = 0;
         int tempCol = column ;
         int tempRow = row ;
@@ -68,6 +68,17 @@ public class Factory {
                 board[tempRow][tempCol] = bship;
             }
         }
+    }
+
+    private int getScoreByShipTypeId(String id) {
+        List<ShipType> types = GameData.getShipTypes().getShipType();
+        int score =0 ;
+        for(ShipType type : types) {
+            if(id.equals(type.getId())) {
+                score = type.getScore();
+            }
+        }
+        return score;
     }
 
     private void printb(GameTool[][] board) {

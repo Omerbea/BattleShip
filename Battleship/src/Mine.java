@@ -6,4 +6,9 @@ public abstract class Mine extends GameTool {
     public boolean updateHitMe() {
         return false;
     }
+
+    @Override
+    public int getScore() {
+        return 0;
+    }
 }

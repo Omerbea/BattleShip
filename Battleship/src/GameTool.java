@@ -3,7 +3,7 @@ public abstract class GameTool {
     private String species;
     private String type;
     private char sign ;
-
+    private int score ;
 
 
     public  GameTool (String i_species , String i_type , char i_sign){
@@ -20,6 +20,10 @@ public abstract class GameTool {
 
     public String getType() {
         return type;
+    }
+
+    public int getScore() {
+        return score;
     }
 
     abstract public boolean updateHitMe();
