@@ -70,19 +70,6 @@ public class Player {
         return  result;
     }
 
-    public void updateHitMe (int row, int column){
-        updateStatisticsHitMe (row, column);
-        boolean distroyShip =  myBoard[row][column].updateHitMe();
-        if (distroyShip){
-            numOfShip--;
-            if (numOfShip == 0){
-                isAlive = false;
-            }
-        }
-        myBoard[row][column] = null;
-    }
-
-
     private  void updateStatisticsMyTurn (int row, int clolumn, boolean iHit, String typeGameTool){
         if (iHit){
             //TODO:
