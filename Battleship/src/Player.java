@@ -5,15 +5,15 @@ import java.util.List;
 public class Player {
 
     class PlayerStatistics {
-        int scure = 0;
-        int missNum = 0;
-        long avargeTimeTurn = 0;
+        private int scure = 0;
+        private int missNum = 0;
+        private long avargeTimeTurn = 0;
 
         public int getMissNum() {
             return missNum;
         }
 
-        public int getScure() {
+        public int getScore() {
             return scure;
         }
 
@@ -25,10 +25,11 @@ public class Player {
             missNum = missNum++;
         }
 
-        public void incScure(int inc) {
+        public void incScore(int inc) {
             this.scure += inc;
         }
     }
+
     GameTool[][] myBoard ;
     char[][] rivalBoard ;
     String Name ;
@@ -95,6 +96,8 @@ public class Player {
         updateStatisticsMyTurn(row, column , true, typeGameTool);
         updateRivalBoard (row,column, true);
     }
+
+    // פונקציה לעדכון
 
 
     private boolean updateRivalBoard (int row, int column, boolean iHit){

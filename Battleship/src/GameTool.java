@@ -24,7 +24,7 @@ public abstract class GameTool {
 
     abstract public boolean updateHitMe();
     public char getMySing (){
-        return  getMySing();
+        return  sign;
     }
 
 
