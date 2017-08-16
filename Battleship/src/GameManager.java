@@ -155,7 +155,7 @@ public class GameManager {
         }
 
         gameStatistic.incrementTurn();
-        userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates");
+        userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates. first row space and then colunm");
         long startTime = System.currentTimeMillis();
         ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
         //Validator
