@@ -20,11 +20,11 @@ public class GameManager {
         }
 
         public  long getGameTime () {
-            return (System.nanoTime() - startTime);
+            return ((System.nanoTime() - startTime)/1000);
         }
 
         public  void incrementTurn (){
-            howManyTurn = howManyTurn++;
+            howManyTurn += 1;
         }
     }
 
@@ -95,7 +95,7 @@ public class GameManager {
                     this.showStatusGame();
                     break;
                 case 4:
-                    this.excecuteMove();
+                    this.executeMove();
                     break;
                 case 5:
                     this.showStatistic();
@@ -119,8 +119,10 @@ public class GameManager {
             this.handleWithErrorNoGame("no game run...");
             return  false;
         }
+        userInterface.printMassage(" ");
         userInterface.printMassage("Statistics: ");
         userInterface.printMassage("Number of Turns: " + gameStatistic.howManyTurn);
+        userInterface.printMassage("Game Time: " + gameStatistic.getGameTime());
         showStatisticOnePlayer(whoPlay);
         showStatisticOnePlayer(1-whoPlay);
         return  true;
@@ -128,11 +130,11 @@ public class GameManager {
 
     private void showStatisticOnePlayer (int player){
         //scure
-        userInterface.printMassage( "Scure: " + players[player].getName() + ": "+  players[player].getScore());
+        userInterface.printMassage( players[player].getName() +  " -- Score: " +  players[player].getScore());
         //miss
-        userInterface.printMassage( "Miss: " + players[player].getName() + ": "+  players[player].getMissNum());
+        userInterface.printMassage( players[player].getName() +  " -- Miss:  "+  players[player].getMissNum());
         //Average time
-        userInterface.printMassage( "Average time: " + players[player].getName() + ": "+  players[player].getAvargeTime());
+        userInterface.printMassage( players[player].getName() + " -- Average time: " +  players[player].getAvargeTime());
     }
     private void handleWithErrorNoGame (String msg){
                 userInterface.printMassage(msg);
@@ -146,28 +148,27 @@ public class GameManager {
     }
 
 
-    private  boolean excecuteMove() {
-
-
-
+    private  boolean executeMove() {
         if (!this.isGameRun) {
             this.handleWithErrorNoGame("no game run...");
         }
 
-        gameStatistic.incrementTurn();
         userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates. first row space and then colunm");
+
         long startTime = System.currentTimeMillis();
         ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
-        //Validator
         long finishTime = System.currentTimeMillis();
+        //Validator
         long deltaTime = finishTime - startTime ;
-        players[whoPlay].setAvargeTimeTurn(deltaTime);
+        players[whoPlay].setAvargeTimeTurn(deltaTime / 1000);
+        gameStatistic.incrementTurn();
         ArrayList <String> gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
         switch (gameToolType.get(0)){
             case "non":
                 players[whoPlay].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
                 this.changePlayer();
-                userInterface.printMassage(("You miss :( "));
+                //userInterface.printMassage(("You miss :( "));
+                handleWithErrorNoGame("You miss :( ");
                 return true;
             case "BattleShip":
                 players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1));

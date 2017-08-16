@@ -80,6 +80,7 @@ public class Player {
         ArrayList<String> result = new ArrayList<String>();
         if (myBoard[row][column] == null){
             result.add("non");
+            return result;
         }
 
         result.add(myBoard[row][column].getSpecies());
