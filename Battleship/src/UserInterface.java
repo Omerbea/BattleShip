@@ -73,7 +73,6 @@ public class UserInterface {
         boardSize = boardOne[0].length;
 
 
-        printMenu(menu , "");
 
         System.out.println(name + " Board :");
         System.out.println();
@@ -101,6 +100,9 @@ public class UserInterface {
         System.out.printf("\n");
 
         System.out.printf("Current Score : %d \n" , score);
+
+        printMenu(menu , "");
+
     }
 
 

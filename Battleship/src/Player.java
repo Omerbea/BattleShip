@@ -5,7 +5,7 @@ import java.util.List;
 public class Player {
 
     class PlayerStatistics {
-        private int scure = 0;
+        private int score = 0;
         private int missNum = 0;
         private long avargeTimeTurn = 0;
 
@@ -14,11 +14,15 @@ public class Player {
         }
 
         public int getScore() {
-            return scure;
+            return score;
         }
 
         public long getAverageTimeTurn() {
             return avargeTimeTurn;
+        }
+
+        public void setAvargeTimeTurn(long time) {
+            avargeTimeTurn = time ;
         }
 
         public void incMissNum() {
@@ -26,7 +30,7 @@ public class Player {
         }
 
         public void incScore(int inc) {
-            this.scure += inc;
+            this.score += inc;
         }
     }
 
@@ -54,6 +58,10 @@ public class Player {
     public long getAvargeTime (){
         return  playerStatistics.avargeTimeTurn;
     }
+
+    public void setAvargeTimeTurn(long time) {
+        playerStatistics.setAvargeTimeTurn(time);
+    }
     /* name - player name
         size - size board
         newPlayreBoard -  is must be a valid before we call to the constractor*/
@@ -80,13 +88,15 @@ public class Player {
     }
 
 
-    private  void updateStatisticsMyTurn (int row, int clolumn, boolean iHit, String typeGameTool){
+    private  void updateStatisticsMyTurn (int row, int column, boolean iHit, String typeGameTool){
 
         if (iHit){
             //TODO:
+            playerStatistics.incScore(myBoard[row][column].getScore());
         }
         else{
             //TODO:
+            playerStatistics.incMissNum();
         }
     }
 
@@ -104,9 +114,6 @@ public class Player {
         updateStatisticsMyTurn(row, column , true, typeGameTool);
         updateRivalBoard (row,column, true);
     }
-
-    // פונקציה לעדכון
-
 
     private boolean updateRivalBoard (int row, int column, boolean iHit){
         if (rivalBoard[row][column] != 0){
@@ -141,13 +148,5 @@ public class Player {
         return rivalBoard;
     }
 
-    /* just for testing
-    public void boardtest() {
-        board[0][0] = new BattleShip();
-        board[0][1] = new Mine();
-        board[0][2] = null ;
-        board[0][3] = null ;
-    }
-    */
 
 }

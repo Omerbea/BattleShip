@@ -147,6 +147,10 @@ public class GameManager {
 
 
     private  boolean excecuteMove() {
+
+
+        long startTime = System.currentTimeMillis();
+
         if (!this.isGameRun) {
             this.handleWithErrorNoGame("no game run...");
         }
@@ -171,6 +175,11 @@ public class GameManager {
                 break;
 
         }
+
+
+        long finishTime = System.currentTimeMillis();
+        long deltaTime = finishTime - startTime ;
+        players[whoPlay].setAvargeTimeTurn(deltaTime);
 
         return true;
 
