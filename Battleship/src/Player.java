@@ -17,7 +17,7 @@ public class Player {
             return scure;
         }
 
-        public long getAvargeTimeTurn() {
+        public long getAverageTimeTurn() {
             return avargeTimeTurn;
         }
 
@@ -36,6 +36,7 @@ public class Player {
     private  boolean isAlive;
     private int size;
     private int score = 0;
+    private PlayerStatistics playerStatistics = new PlayerStatistics();
 
     public String getName() {
         return Name;
@@ -45,6 +46,13 @@ public class Player {
         return score;
     }
 
+    public int getMissNum(){
+        return  playerStatistics.getMissNum();
+    }
+
+    public long getAvargeTime (){
+        return  playerStatistics.avargeTimeTurn;
+    }
     /* name - player name
         size - size board
         newPlayreBoard -  is must be a valid before we call to the constractor*/

@@ -78,13 +78,14 @@ public class GameManager {
 
             switch (input) {
                 case 1:
-                    this.loadGame();
-                    this.userInterface.printMassage("your file loaded...");
-                    try {
-                        TimeUnit.SECONDS.sleep(1);
-                    } catch (InterruptedException e) {
+                    if (this.loadGame()) {
+                        this.userInterface.printMassage("your file loaded...");
+                        try {
+                            TimeUnit.SECONDS.sleep(1);
+                        } catch (InterruptedException e) {
+                        }
+                        this.userInterface.printMenu(mainMenu, "middel");
                     }
-                    this.userInterface.printMenu(mainMenu, "middel");
 
                     break;
                 case 2:
@@ -115,17 +116,26 @@ public class GameManager {
 
     private boolean showStatistic () {
         if (!this.isGameRun) {
-            this.handleWithErrorNoGame();
+            this.handleWithErrorNoGame("no game run...");
             return  false;
         }
         userInterface.printMassage("Statistics: ");
         userInterface.printMassage("Number of Turns: " + gameStatistic.howManyTurn);
-        
+        showStatisticOnePlayer(whoPlay);
+        showStatisticOnePlayer(1-whoPlay);
         return  true;
     }
 
-    private void handleWithErrorNoGame (){
-                userInterface.printMassage("no game run...");
+    private void showStatisticOnePlayer (int player){
+        //scure
+        userInterface.printMassage( "Scure: " + players[player].getName() + ": "+  players[player].getScore());
+        //miss
+        userInterface.printMassage( "Miss: " + players[player].getName() + ": "+  players[player].getMissNum());
+        //Average time
+        userInterface.printMassage( "Average time: " + players[player].getName() + ": "+  players[player].getAvargeTime());
+    }
+    private void handleWithErrorNoGame (String msg){
+                userInterface.printMassage(msg);
                 try {
                     TimeUnit.SECONDS.sleep(1);
                 }
@@ -138,10 +148,10 @@ public class GameManager {
 
     private  boolean excecuteMove() {
         if (!this.isGameRun) {
-            this.handleWithErrorNoGame();
+            this.handleWithErrorNoGame("no game run...");
         }
         gameStatistic.incrementTurn();
-        userInterface.printMassage("player: " + players[whoPlay].getName() + " please insert coordinates");
+        userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates");
         ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
         ArrayList <String> gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
         switch (gameToolType.get(0)){
@@ -175,24 +185,19 @@ public class GameManager {
         if (! this.isGameLoaded){
             //ERROR: the game not loaded.
             //TODO: implement return relevant massage
-            this.userInterface.printMassage("no file loaded, please try option 1 befre you try to start game..");
+            handleWithErrorNoGame("game not loaded...");
         }
-        this.showStatusGame();
         this.isGameRun = true;
+        this.showStatusGame();
+        //TODO: embuse of the function its not realy error
+        handleWithErrorNoGame("");
         return  true;
     }
 
         private boolean showStatusGame (){
          if (! this.isGameRun){
-            this.userInterface.printMassage("ERROR: no game run...");
-            try {
-                TimeUnit.SECONDS.sleep(1);
-            }
-            catch (InterruptedException e){
-                // Do nothing4
-            }
-            userInterface.printMenu(this.mainMenu, "middel");
-             return false;
+                handleWithErrorNoGame("no game run...");
+                return false;
         }
         try {
             userInterface.printBaordsAndMenu(players[whoPlay].getName() ,players[whoPlay].getMyBoardForPrint(),players[whoPlay].getRivalBoard(), players[whoPlay].getScore(), this.mainMenu );
@@ -201,12 +206,13 @@ public class GameManager {
             return  false;
         }
         return  true;
-
     }
 
     private boolean loadGame (){
-        if (this.isGameRun){
+        if ( this.isGameRun){
             //TODO: present error to the ui and back to the loop
+            handleWithErrorNoGame("Game is already run... ");
+            return  false;
         }
         try{
             if (this.factory == null) {
