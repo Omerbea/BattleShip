@@ -75,7 +75,8 @@ public class UserInterface {
 
         printMenu(menu , "");
 
-        System.out.println("Player Board :");
+        System.out.println(name + " Board :");
+        System.out.println();
         printTopRaw();
         for (; row < boardSize; row++) {
 

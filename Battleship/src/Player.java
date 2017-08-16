@@ -70,7 +70,9 @@ public class Player {
         return  result;
     }
 
+
     private  void updateStatisticsMyTurn (int row, int clolumn, boolean iHit, String typeGameTool){
+
         if (iHit){
             //TODO:
         }
