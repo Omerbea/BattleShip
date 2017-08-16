@@ -54,6 +54,7 @@ public class Player {
 
     private  void updateStatisticsHitMe (int row, int column){
         //TODO: implement
+        // 
     }
 
     private  void updateStatisticIHit ( int row, int column, String typeGameTool){
