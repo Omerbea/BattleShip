@@ -37,7 +37,9 @@ public class UserInterface {
 
         Scanner scanner = new Scanner(System.in);
         int row = scanner.nextInt();
-        int column = scanner.nextInt();
+        int column = scanner.next().charAt(0);
+        scanner.nextLine();
+
         column -= 'A';
 
         ArrayList<Integer> coordinates = new ArrayList<Integer>();
