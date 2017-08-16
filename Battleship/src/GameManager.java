@@ -1,4 +1,6 @@
 import GameParser.BattleShipGame;
+import com.sun.org.apache.xpath.internal.operations.Bool;
+import javafx.beans.binding.BooleanExpression;
 import sun.applet.Main;
 
 import java.lang.reflect.Array;
@@ -8,6 +10,25 @@ import java.util.concurrent.TimeUnit;
 
 
 public class GameManager {
+
+    class GameStatistic {
+        int howManyTurn =0 ;
+        long startTime = System.nanoTime();
+
+        public int getHowManyTurn() {
+            return howManyTurn;
+        }
+
+        public  long getGameTime () {
+            return (System.nanoTime() - startTime);
+        }
+
+        public  void incrementTurn (){
+            howManyTurn = howManyTurn++;
+        }
+    }
+
+    private  GameStatistic gameStatistic ;
     private ArrayList<String> mainMenu = new ArrayList<>();
     private  boolean isGameRun = false;
     private  boolean isGameLoaded = false;
@@ -18,6 +39,7 @@ public class GameManager {
     private UserInterface userInterface = new UserInterface();
     public GameManager(){
         setMainMenu();
+        gameStatistic = new GameStatistic();
     }
 
     public static void main(String [] args) throws Exception {
@@ -35,18 +57,18 @@ public class GameManager {
     private void  setMainMenu(){
         this.mainMenu.add("read file");  //1
         this.mainMenu.add("start game"); //2
-        this.mainMenu.add("play your turn"); //3
-        this.mainMenu.add("statistics"); //4
-        this.mainMenu.add("restart"); //5
-        this.mainMenu.add("add mine"); //6
-        this.mainMenu.add("quit game"); //7
+        this.mainMenu.add("show game state"); //3
+        this.mainMenu.add("play your turn"); //4
+        this.mainMenu.add("statistics"); //5
+        this.mainMenu.add("restart"); //6
+        this.mainMenu.add("add mine"); //7
+        this.mainMenu.add("quit game"); //8
     }
     private void start() {
         this.userInterface.printMenu(mainMenu,"middle");
         int input = -1;
 
         while (true) {
-
             try {
                 input = this.userInterface.getMenuOption();
             } catch (Exception e) {
@@ -61,7 +83,6 @@ public class GameManager {
                     try {
                         TimeUnit.SECONDS.sleep(1);
                     } catch (InterruptedException e) {
-                        e.printStackTrace();
                     }
                     this.userInterface.printMenu(mainMenu, "middel");
 
@@ -76,6 +97,7 @@ public class GameManager {
                     this.excecuteMove();
                     break;
                 case 5:
+                    this.showStatistic();
                     break;
                 case 6:
                     System.out.println("option 6");
@@ -91,28 +113,50 @@ public class GameManager {
         }
     }
 
+    private boolean showStatistic () {
+        if (!this.isGameRun) {
+            this.handleWithErrorNoGame();
+            return  false;
+        }
+        userInterface.printMassage("Statistics: ");
+        userInterface.printMassage("Number of Turns: " + gameStatistic.howManyTurn);
+        
+        return  true;
+    }
+
+    private void handleWithErrorNoGame (){
+                userInterface.printMassage("no game run...");
+                try {
+                    TimeUnit.SECONDS.sleep(1);
+                }
+                catch (InterruptedException e){
+
+                }
+                userInterface.printMenu(this.mainMenu, "middel");
+    }
+
 
     private  boolean excecuteMove() {
         if (!this.isGameRun) {
-            //ERROR:
-            //TODO: implement - returrn current massage
-            return false;
+            this.handleWithErrorNoGame();
         }
+        gameStatistic.incrementTurn();
         userInterface.printMassage("player: " + players[whoPlay].getName() + " please insert coordinates");
         ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
-        String gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
-        switch (gameToolType){
+        ArrayList <String> gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
+        switch (gameToolType.get(0)){
             case "non":
                 players[whoPlay].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
                 this.changePlayer();
+                userInterface.printMassage(("You miss :( "));
                 return true;
             case "BattleShip":
-                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType);
+                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1));
                 userInterface.printMassage("You hit! your turn...");
 
                 break;
             case  "Mine":
-                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType);
+                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1));
                 break;
 
         }
@@ -125,6 +169,8 @@ public class GameManager {
         whoPlay = 1- whoPlay;
     }
 
+
+
     private  boolean gameStart(){
         if (! this.isGameLoaded){
             //ERROR: the game not loaded.
@@ -136,11 +182,18 @@ public class GameManager {
         return  true;
     }
 
-    private boolean showStatusGame (){
-/*        if (! this.isGameRun){
-            //TODO: return relevent massage
-            return false;
-        }*/
+        private boolean showStatusGame (){
+         if (! this.isGameRun){
+            this.userInterface.printMassage("ERROR: no game run...");
+            try {
+                TimeUnit.SECONDS.sleep(1);
+            }
+            catch (InterruptedException e){
+                // Do nothing4
+            }
+            userInterface.printMenu(this.mainMenu, "middel");
+             return false;
+        }
         try {
             userInterface.printBaordsAndMenu(players[whoPlay].getName() ,players[whoPlay].getMyBoardForPrint(),players[whoPlay].getRivalBoard(), players[whoPlay].getScore(), this.mainMenu );
         }
@@ -156,7 +209,9 @@ public class GameManager {
             //TODO: present error to the ui and back to the loop
         }
         try{
-            factory = new Factory();
+            if (this.factory == null) {
+                this.factory = new Factory();
+            }
             this.players = factory.createPlayers();
             this.validator = factory.getGameDataValidator();
             this.isGameLoaded = true;
