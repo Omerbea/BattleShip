@@ -19,8 +19,12 @@ public class GameManager {
             return howManyTurn;
         }
 
-        public  long getGameTime () {
-            return ((System.nanoTime() - startTime)/1000);
+        public  String getGameTime () {
+            long timeNano= ((System.nanoTime() - startTime));
+            String hms = String.format("%02d:%02d",
+                     TimeUnit.NANOSECONDS.toMinutes(timeNano) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours(timeNano)),
+                    TimeUnit.NANOSECONDS.toSeconds(timeNano) - TimeUnit.NANOSECONDS.toSeconds(TimeUnit.NANOSECONDS.toMinutes(timeNano)));
+            return hms;
         }
 
         public  void incrementTurn (){
@@ -116,7 +120,7 @@ public class GameManager {
 
     private boolean showStatistic () {
         if (!this.isGameRun) {
-            this.handleWithErrorNoGame("no game run...");
+            this.backToMainMenu("no game run...");
             return  false;
         }
         userInterface.printMassage(" ");
@@ -125,6 +129,7 @@ public class GameManager {
         userInterface.printMassage("Game Time: " + gameStatistic.getGameTime());
         showStatisticOnePlayer(whoPlay);
         showStatisticOnePlayer(1-whoPlay);
+        backToMainMenu(" ");
         return  true;
     }
 
@@ -136,7 +141,7 @@ public class GameManager {
         //Average time
         userInterface.printMassage( players[player].getName() + " -- Average time: " +  players[player].getAvargeTime());
     }
-    private void handleWithErrorNoGame (String msg){
+    private void backToMainMenu (String msg){
                 userInterface.printMassage(msg);
                 try {
                     TimeUnit.SECONDS.sleep(1);
@@ -150,17 +155,17 @@ public class GameManager {
 
     private  boolean executeMove() {
         if (!this.isGameRun) {
-            this.handleWithErrorNoGame("no game run...");
+            this.backToMainMenu("no game run...");
         }
 
         userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates. first row space and then colunm");
 
-        long startTime = System.currentTimeMillis();
+        long startTime = System.nanoTime();
         ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
-        long finishTime = System.currentTimeMillis();
+        long finishTime = System.nanoTime();
         //Validator
         long deltaTime = finishTime - startTime ;
-        players[whoPlay].setAvargeTimeTurn(deltaTime / 1000);
+        players[whoPlay].setAvargeTimeTurn(deltaTime);
         gameStatistic.incrementTurn();
         ArrayList <String> gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
         switch (gameToolType.get(0)){
@@ -168,7 +173,7 @@ public class GameManager {
                 players[whoPlay].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
                 this.changePlayer();
                 //userInterface.printMassage(("You miss :( "));
-                handleWithErrorNoGame("You miss :( ");
+                backToMainMenu("You miss :( ");
                 return true;
             case "BattleShip":
                 players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1));
@@ -188,6 +193,7 @@ public class GameManager {
 
     }
 
+
     private  void changePlayer (){
         whoPlay = 1- whoPlay;
     }
@@ -198,7 +204,7 @@ public class GameManager {
         if (! this.isGameLoaded){
             //ERROR: the game not loaded.
             //TODO: implement return relevant massage
-            handleWithErrorNoGame("game not loaded...");
+            backToMainMenu("game not loaded...");
         }
         this.isGameRun = true;
         this.showStatusGame();
@@ -209,7 +215,7 @@ public class GameManager {
 
         private boolean showStatusGame (){
          if (! this.isGameRun){
-                handleWithErrorNoGame("no game run...");
+             backToMainMenu("no game run...");
                 return false;
         }
         try {
@@ -224,7 +230,7 @@ public class GameManager {
     private boolean loadGame (){
         if ( this.isGameRun){
             //TODO: present error to the ui and back to the loop
-            handleWithErrorNoGame("Game is already run... ");
+            backToMainMenu("Game is already run... ");
             return  false;
         }
         try{

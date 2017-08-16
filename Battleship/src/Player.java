@@ -1,6 +1,7 @@
 //import GameParser.BattleShipGame;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.concurrent.TimeUnit;
 
 public class Player {
 
@@ -8,6 +9,12 @@ public class Player {
         private int score = 0;
         private int missNum = 0;
         private long avargeTimeTurn = 0;
+        private long timeTurn =0;
+        private int turns =0 ;
+
+        public int getTurns() {
+            return turns;
+        }
 
         public int getMissNum() {
             return missNum;
@@ -17,17 +24,29 @@ public class Player {
             return score;
         }
 
-        public long getAverageTimeTurn() {
-            return avargeTimeTurn;
+        public String getAverageTimeTurn() {
+            String hms = String.format("%02d:%02d",
+                    TimeUnit.NANOSECONDS.toMinutes(this.avargeTimeTurn) - TimeUnit.HOURS.toMinutes(TimeUnit.NANOSECONDS.toHours(this.avargeTimeTurn)),
+                    TimeUnit.NANOSECONDS.toSeconds(this.avargeTimeTurn) - TimeUnit.NANOSECONDS.toSeconds(TimeUnit.NANOSECONDS.toMinutes(this.avargeTimeTurn)));
+            return hms;
         }
 
-        public void setAvargeTimeTurn(long time) {
-            avargeTimeTurn = time ;
+        public void setAvarageTimeTurn(long time) {
+            if (this.avargeTimeTurn == 0) {
+                this.avargeTimeTurn = time;
+                this.timeTurn = time;
+                this.turns = 1;
+            }
+            else{
+                this.turns++;
+                this.timeTurn += time;
+                long test = (this.timeTurn)/(this.turns);
+                this.avargeTimeTurn = test;
+            }
         }
 
         public void incMissNum() {
-            missNum = missNum++;
-        }
+            this.missNum++;       }
 
         public void incScore(int inc) {
             this.score += inc;
@@ -55,12 +74,12 @@ public class Player {
         return  playerStatistics.getMissNum();
     }
 
-    public long getAvargeTime (){
-        return  playerStatistics.avargeTimeTurn;
+    public String getAvargeTime (){
+        return  playerStatistics.getAverageTimeTurn();
     }
 
     public void setAvargeTimeTurn(long time) {
-        playerStatistics.setAvargeTimeTurn(time);
+        playerStatistics.setAvarageTimeTurn(time);
     }
     /* name - player name
         size - size board
