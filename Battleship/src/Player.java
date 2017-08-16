@@ -82,21 +82,12 @@ public class Player {
         myBoard[row][column] = null;
     }
 
-    private  void updateStatisticsHitMe (int row, int column){
-        //TODO: implement
-        // 
-    }
-
-    private  void updateStatisticIHit ( int row, int column, String typeGameTool){
-        //TODO: implement
-    }
-
-    private  void updateStatisticsMyTurn (int row, int clolumn, boolean iHit, String typeGameTool){
+     private  void updateStatisticsMyTurn (int row, int clolumn, boolean iHit, String typeGameTool){
         if (iHit){
-            updateStatisticIHit(row, clolumn , typeGameTool);
+            //TODO:
         }
         else{
-            updateStatisticsHitMe(row,clolumn);
+            //TODO:
         }
     }
 
