@@ -150,6 +150,7 @@ public class GameManager {
         if (!this.isGameRun) {
             this.handleWithErrorNoGame("no game run...");
         }
+
         gameStatistic.incrementTurn();
         userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates");
         ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
@@ -190,7 +191,7 @@ public class GameManager {
         this.isGameRun = true;
         this.showStatusGame();
         //TODO: embuse of the function its not realy error
-        handleWithErrorNoGame("");
+        //handleWithErrorNoGame("");
         return  true;
     }
 
