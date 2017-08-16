@@ -1,8 +1,34 @@
 //import GameParser.BattleShipGame;
+import java.util.ArrayList;
 import java.util.List;
 
 public class Player {
 
+    class PlayerStatistics {
+        int scure = 0;
+        int missNum = 0;
+        long avargeTimeTurn = 0;
+
+        public int getMissNum() {
+            return missNum;
+        }
+
+        public int getScure() {
+            return scure;
+        }
+
+        public long getAvargeTimeTurn() {
+            return avargeTimeTurn;
+        }
+
+        public void incMissNum() {
+            missNum = missNum++;
+        }
+
+        public void incScure(int inc) {
+            this.scure += inc;
+        }
+    }
     GameTool[][] myBoard ;
     char[][] rivalBoard ;
     String Name ;
@@ -33,11 +59,15 @@ public class Player {
 
     /* return "non" if no hit
     *  otherwise return the name of the GameTool : "mine" or "BattelShip"*/
-    public java.lang.String whoFindThere(int row, int column){
+    public ArrayList<String> whoFindThere(int row, int column){
+        ArrayList<String> result = new ArrayList<String>();
         if (myBoard[row][column] == null){
-            return "non";
+            result.add("non");
         }
-        return myBoard[row][column].getSpecies();
+
+        result.add(myBoard[row][column].getSpecies());
+        result.add((myBoard[row][column].getType()));
+        return  result;
     }
 
     public void updateHitMe (int row, int column){

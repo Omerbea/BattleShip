@@ -2,7 +2,8 @@
 public abstract class GameTool {
     private String species;
     private String type;
-    public char sign ;
+    private char sign ;
+
 
 
     public  GameTool (String i_species , String i_type , char i_sign){
@@ -17,8 +18,14 @@ public abstract class GameTool {
         return  species;
     }
 
+    public String getType() {
+        return type;
+    }
+
     abstract public boolean updateHitMe();
-    abstract public char getMySing ();
+    public char getMySing (){
+        return  getMySing();
+    }
 
 
 }

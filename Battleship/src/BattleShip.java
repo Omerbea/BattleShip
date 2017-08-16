@@ -23,8 +23,5 @@ final public class BattleShip extends GameTool {
         return false;
     }
 
-    @Override
-    public char getMySing() {
-        return  this.sign;
-    }
+
 }
