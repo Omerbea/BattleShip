@@ -59,13 +59,17 @@ public class Factory {
 
         if(shipDirection.equals("ROW")) {
            for(; numberOfIterations < bship.getShipSize() ; numberOfIterations++ , tempCol++) {
-               board[tempRow][tempCol] = bship;
+                   if (GameDataValidator.canShipCoordinateBePlaced(tempRow, tempCol)) {
+                       board[tempRow][tempCol] = bship;
+                   }
            }
         }
 
-         if(shipDirection.equals("COLUMN")) {
+        if(shipDirection.equals("COLUMN")) {
             for( ; numberOfIterations < bship.getShipSize() ; numberOfIterations++ , tempRow++) {
-                board[tempRow][tempCol] = bship;
+                if (GameDataValidator.canShipCoordinateBePlaced(tempRow, tempCol)) {
+                    board[tempRow][tempCol] = bship;
+                }
             }
         }
     }
