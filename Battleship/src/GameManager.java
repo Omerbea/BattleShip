@@ -105,10 +105,13 @@ public class GameManager {
                     this.showStatistic();
                     break;
                 case 6:
-                    System.out.println("option 6");
+                    this.restartGame();
                     break;
                 case 7:
+                    this.addMine();
                     break;
+                case 8:
+                    this.quiteGame();
                 default:
                     // send it to the console
                     System.out.println("Please choose number 1-7");
@@ -117,7 +120,15 @@ public class GameManager {
             }
         }
     }
-
+    private boolean restartGame (){
+        return true;
+    }
+    private  boolean addMine (){
+        return true;
+    }
+    private  boolean quiteGame(){
+        return true;
+    }
     private boolean showStatistic () {
         if (!this.isGameRun) {
             this.backToMainMenu("no game run...");
@@ -175,13 +186,13 @@ public class GameManager {
                 //userInterface.printMassage(("You miss :( "));
                 backToMainMenu("You miss :( ");
                 return true;
-            case "BattleShip":
-                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1));
-                userInterface.printMassage("You hit! your turn...");
+            case "Ship":
+                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1), factory.getScoreByShipTypeId(gameToolType.get(1)));
+                backToMainMenu("You hit! your turn again...");
 
                 break;
             case  "Mine":
-                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1));
+                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1) ,0 );
                 break;
 
         }

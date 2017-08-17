@@ -70,7 +70,7 @@ public class Factory {
         }
     }
 
-    private int getScoreByShipTypeId(String id) {
+    public int getScoreByShipTypeId(String id) {
         List<ShipType> types = GameData.getShipTypes().getShipType();
         int score =0 ;
         for(ShipType type : types) {

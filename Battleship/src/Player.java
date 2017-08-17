@@ -5,6 +5,7 @@ import java.util.concurrent.TimeUnit;
 
 public class Player {
 
+
     class PlayerStatistics {
         private int score = 0;
         private int missNum = 0;
@@ -46,7 +47,7 @@ public class Player {
         }
 
         public void incMissNum() {
-            this.missNum++;       }
+            this.missNum += 1;      }
 
         public void incScore(int inc) {
             this.score += inc;
@@ -59,16 +60,17 @@ public class Player {
     int numOfShip;
     private  boolean isAlive;
     private int size;
-    private int score = 0;
     private PlayerStatistics playerStatistics = new PlayerStatistics();
-
+    private int shipTypeBScore = 5;
+    private int shipTypeAScore = 10;
     public String getName() {
         return Name;
     }
 
-    public int getScore() {
-        return score;
+    public int getScore(){
+        return  this.playerStatistics.getScore();
     }
+
 
     public int getMissNum(){
         return  playerStatistics.getMissNum();
@@ -108,20 +110,18 @@ public class Player {
     }
 
 
-    private  void updateStatisticsMyTurn (int row, int column, boolean iHit, String typeGameTool){
+    private  void updateStatisticsMyTurn (int row, int column, boolean iHit, String typeGameTool , int score){
 
         if (iHit){
-            //TODO:
-            playerStatistics.incScore(myBoard[row][column].getScore());
+                    playerStatistics.incScore(score);
         }
         else{
-            //TODO:
             playerStatistics.incMissNum();
         }
     }
 
     public boolean updateIMissMyTurn (int row, int column ){
-        updateStatisticsMyTurn(row, column, false, null);
+        updateStatisticsMyTurn(row, column, false, null , 0);
         updateRivalBoard(row, column, false);
         return  true;
     }
@@ -130,8 +130,8 @@ public class Player {
         return  isAlive;
     }
 
-    public void updateIHitMyTurn (int row, int column, String typeGameTool){
-        updateStatisticsMyTurn(row, column , true, typeGameTool);
+    public void updateIHitMyTurn (int row, int column, String typeGameTool, int score){
+        updateStatisticsMyTurn(row, column , true, typeGameTool, score);
         updateRivalBoard (row,column, true);
     }
 
