@@ -154,10 +154,6 @@ public class Player {
     }
 
     private boolean updateRivalBoard (int row, int column, boolean iHit){
-        if (rivalBoard[row][column] != 0){
-            System.out.print("warnnig: updateRivalBoard - rivalBoard[row][column] not empty cell");
-            return  false;
-        }
         if (iHit) {
             rivalBoard[row][column] = 'X';
         }

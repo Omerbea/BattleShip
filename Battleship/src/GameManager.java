@@ -232,6 +232,7 @@ public class GameManager {
             case "Mine":
                 userInterface.printMassage( players[whoPlay].getName() +"You hit in Mine :/");
                 this.executeMine(coordinates);
+                backToMainMenu( "");
                 return true ;
              default: return false;
         }
@@ -239,6 +240,12 @@ public class GameManager {
 
     private  boolean executeMine(ArrayList<Integer> coordinates){
         ArrayList <String> gameToolType = players[whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
+        if (gameToolType.get(0) == "Mine"){
+            players[whoPlay].rivalBoard[coordinates.get(0)][coordinates.get(1)] = '-';
+            players[1 - whoPlay].rivalBoard[coordinates.get(0)][coordinates.get(1)] = '-';
+            userInterface.printMassage(players[ 1 - whoPlay].getName() + " your mine Hit at your mine arrival :/ ");
+            return true;
+        }
         this.executeByTypeTool(gameToolType, coordinates ,1- whoPlay );
 
         return true;
