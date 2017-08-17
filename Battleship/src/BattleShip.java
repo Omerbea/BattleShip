@@ -1,12 +1,10 @@
 final public class BattleShip extends GameTool {
 
     private int size;
-    private int score ;
 
     public BattleShip (String i_species, String i_type, int i_size , char i_sign ,int i_score ){
-        super(i_species , i_type , i_sign);
+        super(i_species , i_type , i_sign, i_score);
         size = i_size;
-        score = i_score ;
     }
 
     public int getShipSize() {
@@ -28,6 +26,6 @@ final public class BattleShip extends GameTool {
 
     @Override
     public int getScore() {
-        return score;
+        return super.score;
     }
 }

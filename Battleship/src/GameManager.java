@@ -192,41 +192,57 @@ public class GameManager {
         }
 
         userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates. first row space and then colunm");
-
-        long startTime = System.nanoTime();
-        ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
-        long finishTime = System.nanoTime();
+        long finishTime = 0;
+        long startTime =0;
+        ArrayList<Integer> coordinates = null;
+        while (true) {
+            startTime = System.nanoTime();
+            coordinates = userInterface.waitForCoordinates();
+            finishTime = System.nanoTime();
+            if (this.checkIfgGuessed (coordinates) == false){
+                break;
+            }
+            userInterface.printMassage("You guessed already this cooredinates. try again..");
+        }
         //Validator
         long deltaTime = finishTime - startTime ;
         players[whoPlay].setAvargeTimeTurn(deltaTime);
         gameStatistic.incrementTurn();
         ArrayList <String> gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
-        switch (gameToolType.get(0)){
+        executeByTypeTool (gameToolType , coordinates , whoPlay);
+
+        return true;
+    }
+
+    private  boolean checkIfgGuessed(ArrayList<Integer> coordinates){
+         return players[whoPlay].rivalBoard[coordinates.get(0)][ coordinates.get(1)] != 0;
+    }
+    private boolean executeByTypeTool (ArrayList<String> gameToolType , ArrayList<Integer> coordinates , int player) {
+        switch (gameToolType.get(0)) {
             case "non":
-                players[whoPlay].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
+                players[player].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
                 this.changePlayer();
                 //userInterface.printMassage(("You miss :( "));
                 backToMainMenu("You miss :( ");
                 return true;
             case "Ship":
-                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1), factory.getScoreByShipTypeId(gameToolType.get(1)));
+                players[player].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1), factory.getScoreByShipTypeId(gameToolType.get(1)));
                 backToMainMenu("You hit! your turn again...");
-
-                break;
-            case  "Mine":
-                players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1) ,0 );
-                break;
-
+                return  true;
+            case "Mine":
+                userInterface.printMassage( players[whoPlay].getName() +"You hit in Mine :/");
+                this.executeMine(coordinates);
+                return true ;
+             default: return false;
         }
-
-
-
-
-        return true;
-
     }
 
+    private  boolean executeMine(ArrayList<Integer> coordinates){
+        ArrayList <String> gameToolType = players[whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
+        this.executeByTypeTool(gameToolType, coordinates ,1- whoPlay );
 
+        return true;
+    }
     private  void changePlayer (){
         whoPlay = 1- whoPlay;
     }

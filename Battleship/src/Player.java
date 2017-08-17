@@ -97,23 +97,28 @@ public class Player {
 
     /* return "non" if no hit
     *  otherwise return the name of the GameTool : "mine" or "BattelShip"*/
-    public ArrayList<String> whoFindThere(int row, int column){
+    public ArrayList<String> whoFindThere(int row, int column) {
         ArrayList<String> result = new ArrayList<String>();
-        if (myBoard[row][column] == null){
+        if (myBoard[row][column] == null) {
             result.add("non");
             return result;
         }
 
-        result.add(myBoard[row][column].getSpecies());
-        result.add((myBoard[row][column].getType()));
-        return  result;
+        if (myBoard[row][column].getIsAlive()) {
+            result.add(myBoard[row][column].getSpecies());
+            result.add((myBoard[row][column].getType()));
+        }
+        else{
+            result.add("beenThere");
+        }
+        return result;
     }
 
 
     private  void updateStatisticsMyTurn (int row, int column, boolean iHit, String typeGameTool , int score){
         if (iHit){
             if (typeGameTool == "Mine"){
-                   
+
             }
             else {
                 playerStatistics.incScore(score);
@@ -135,7 +140,7 @@ public class Player {
             return  false;
         }
 
-        this.myBoard[row][column] = new Mine("Mine", "Mine", 'M');
+        this.myBoard[row][column] = new Mine("Mine");
         return  true;
     }
 
