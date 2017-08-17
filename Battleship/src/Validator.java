@@ -16,9 +16,9 @@ public class Validator {
     private static final int COLUMN = 1;
     private final int boardsize ;
 
-    Validator(int size) throws Exception {
-        ValidateBoardSize(size);
-        boardsize = size ;
+    Validator(int boardSize) throws Exception {
+        ValidateBoardSize(boardSize);
+        boardsize = boardSize ;
     }
 
     private void ValidateBoardSize(int size) throws Exception {
@@ -86,5 +86,10 @@ public class Validator {
             return false ;
         }
         return true ;
+    }
+
+    public boolean canShipCoordinateBePlaced(int tempRow, int tempCol) {
+        // implement
+        return true;
     }
 }
