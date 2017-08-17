@@ -111,9 +111,13 @@ public class Player {
 
 
     private  void updateStatisticsMyTurn (int row, int column, boolean iHit, String typeGameTool , int score){
-
         if (iHit){
-                    playerStatistics.incScore(score);
+            if (typeGameTool == "Mine"){
+                   
+            }
+            else {
+                playerStatistics.incScore(score);
+            }
         }
         else{
             playerStatistics.incMissNum();
@@ -123,6 +127,15 @@ public class Player {
     public boolean updateIMissMyTurn (int row, int column ){
         updateStatisticsMyTurn(row, column, false, null , 0);
         updateRivalBoard(row, column, false);
+        return  true;
+    }
+
+    public boolean setMine (int row, int column){
+        if (this.myBoard[row][column] != null){
+            return  false;
+        }
+
+        this.myBoard[row][column] = new Mine("Mine", "Mine", 'M');
         return  true;
     }
 

@@ -47,12 +47,6 @@ public class GameManager {
     }
 
     public static void main(String [] args) throws Exception {
-        Factory f = new Factory();
-        try {
-            f.createPlayers();
-        } catch (Exception e) {
-            System.out.printf(e.getMessage());
-        }
 
         GameManager gameManager = new GameManager();
         gameManager.start();
@@ -112,21 +106,49 @@ public class GameManager {
                     break;
                 case 8:
                     this.quiteGame();
+                    return;
                 default:
                     // send it to the console
                     System.out.println("Please choose number 1-7");
-
 
             }
         }
     }
     private boolean restartGame (){
+        userInterface.printMassage("restarting...");
+        this.whoPlay=0;
+        this.players = null;
+        this.gameStatistic = null;
+        this.isGameRun =false;
+        this.isGameLoaded= false;
+        userInterface.printMassage(("restart successfully!"));
+        this.userInterface.printMenu(mainMenu,"middle");
+
+
         return true;
+
     }
     private  boolean addMine (){
+        while (true) {
+            userInterface.printMassage("please insert coordinates ");
+            ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
+            if (players[whoPlay].setMine(coordinates.get(0), coordinates.get(1))){
+                backToMainMenu("set mine! lets kill the matherfaker!!!");
+                break;
+            }
+            userInterface.printMassage(" canot set Mine in these place. please insert new coordinates... ");
+        }
         return true;
     }
     private  boolean quiteGame(){
+        userInterface.printMassage("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        userInterface.printMassage("Hope your enjoy:)");
+        userInterface.printMassage("Thank for you play with us... see you next time ;)");
+        userInterface.printMassage("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
+        userInterface.printMassage("Quit!");
+
+
+        userInterface.printMassage("Quit Game...");
         return true;
     }
     private boolean showStatistic () {

@@ -1,4 +1,4 @@
-public abstract class Mine extends GameTool {
+public class Mine extends GameTool {
     public Mine (String i_species){
         super(i_species, "Mine" , '*');
     }
@@ -7,8 +7,7 @@ public abstract class Mine extends GameTool {
         return false;
     }
 
-    @Override
-    public int getScore() {
-        return 0;
+    public  Mine (String i_species , String i_type , char i_sign){
+        super( i_species, i_type , i_sign);
     }
 }
