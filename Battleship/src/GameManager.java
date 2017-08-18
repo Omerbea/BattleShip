@@ -227,6 +227,7 @@ public class GameManager {
                 return true;
             case "Ship":
                 players[player].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1), factory.getScoreByShipTypeId(gameToolType.get(1)));
+                players[1-player].updateHitMe(coordinates);
                 backToMainMenu("You hit! your turn again...");
                 return  true;
             case "Mine":

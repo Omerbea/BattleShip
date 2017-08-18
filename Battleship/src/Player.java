@@ -163,12 +163,23 @@ public class Player {
         return true;
     }
 
+   public boolean updateHitMe (ArrayList<Integer> cooredinates){
+        Position position = new Position(cooredinates.get(0), cooredinates.get(1));
+        this.myBoard[cooredinates.get(0)][cooredinates.get(1)].updateHitMe(position);
+        //TODO : check if game over
+        return true;
+    }
+
     public char [][] getMyBoardForPrint() {
         char [][] boardForPrint = new char[this.size][this.size];
         for (int row =0 ; row< size ; row++){
             for (int column =0 ; column < size ; column++){
                 if (this.myBoard[row][column] != null) {
-                    boardForPrint[row][column] = this.myBoard[row][column].getMySing();
+                    if (this.myBoard[row][column].isHitMyThere(new Position(row, column))) {
+                        boardForPrint[row][column] = 'X';
+                    } else {
+                        boardForPrint[row][column] = this.myBoard[row][column].getMySing();
+                    }
                 }
                 else{
                     boardForPrint[row][column] = ' ';
