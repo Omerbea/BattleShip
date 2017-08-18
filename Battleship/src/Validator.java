@@ -1,17 +1,23 @@
-import GameParser.BattleShipGame;
-import GameParser.BattleShipGame.Boards;
 import GameParser.BattleShipGame.Boards.Board;
 import GameParser.BattleShipGame.Boards.Board.Ship;
-import GameParser.BattleShipGame.ShipTypes.ShipType;
-import com.sun.deploy.util.StringUtils;
 
+import java.util.LinkedList;
 import java.util.List;
-import java.util.Scanner;
-import java.util.concurrent.ExecutionException;
 
 public class Validator {
 
+    class Postion {
+        private int row ;
+        private int column;
 
+        Postion(int i_row , int i_column) {
+            row = i_row;
+            column = i_column ;
+        }
+
+        public int getRow() {return row ;}
+        public int getColumn() {return column;}
+    }
     private static final int ROW = 0 ;
     private static final int COLUMN = 1;
     private final int boardsize ;
@@ -70,8 +76,8 @@ public class Validator {
             throw new Exception("Row and column must be number .");
         }
 
-        if(!IsCordinateOutOfRange(cordinate[ROW]) ||
-                !IsCordinateOutOfRange(cordinate[COLUMN])) {
+        if(!isCordinateInRange(cordinate[ROW]) ||
+                !isCordinateInRange(cordinate[COLUMN])) {
             throw new Exception("Cordinate supplyed is out of range . ");
 
         }
@@ -79,17 +85,82 @@ public class Validator {
         return cordinate;
     }
 
-    private boolean IsCordinateOutOfRange(int cordinate) {
 
-        if(cordinate > boardsize ||
-                cordinate < boardsize) {
-            return false ;
+    private boolean isCordinateInRange(int cordinate) {
+
+        if(cordinate < boardsize &&
+                cordinate >= 0) {
+            return true ;
         }
-        return true ;
+        return false ;
     }
 
-    public boolean canShipCoordinateBePlaced(int tempRow, int tempCol) {
-        // implement
+    public boolean canGameToolBePlaced(GameTool bship, GameTool[][] board) {
+
+        LinkedList<Postion> listOfGameToolCoordinates = new LinkedList<>();
+        listOfGameToolCoordinates = createListOfCoordinates(bship);
+
+        //check if gametool can be placed
+        for (int i = 0; i < bship.getSize(); i++) {
+            if (isGameToolArroundCoordinate(bship.getRow(), bship.getColumn(), board , listOfGameToolCoordinates))
+                return false;
+        }
         return true;
+    }
+
+    private boolean isGameToolArroundCoordinate(int i_row, int i_column, GameTool[][] board, LinkedList<Postion> listOfGameToolCoordinates) {
+
+        int runner = 0;
+
+        int column = (i_column - 1) ;
+        int row = ( i_row - 1);
+
+        for(int j = 0 ; j < 3 ; j++) {
+
+            for (int index = 0; index < 3; index++, runner++) {
+
+                if(isCordinateInRange(row) && isCordinateInRange(column + runner)) {
+                    if (!isMyCoordinate(row, column + runner, listOfGameToolCoordinates)
+                            && board[row][column + runner] != null) {
+                        return true;
+                    }
+                }
+            }
+            runner = 0 ;
+            row = row + 1;
+        }
+    return false ;
+    }
+
+    private boolean isMyCoordinate(int row, int column, LinkedList<Postion> listOfGameToolCoordinates) {
+        for(Validator.Postion p : listOfGameToolCoordinates) {
+            if (p.getColumn() == column &&
+                    p.getRow() == row) {
+                return true;
+            }
+        }
+
+        return false ;
+    }
+
+    private LinkedList<Postion> createListOfCoordinates(GameTool bship) {
+
+        LinkedList<Postion> postionList = new LinkedList<>();
+
+
+        for(int i = 0 ; i < bship.getSize() ; i++) {
+            if(bship.getShipDirection().equals("ROW")) {
+                Postion p = new Postion(bship.getRow() , (bship.getColumn() + i));
+                postionList.add(p);
+
+            }
+            else if (bship.getShipDirection().equals("COLUMN")) {
+                Postion p = new Postion((bship.getRow()+i) , bship.getColumn());
+                postionList.add(p);
+            }
+        }
+
+        return postionList;
+
     }
 }
