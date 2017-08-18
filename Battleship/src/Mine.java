@@ -1,7 +1,4 @@
 public class Mine extends GameTool {
-    public Mine (String i_species){
-        super(i_species, "Mine" , 'M', 0, 1);
-    }
 
      public boolean updateHitMe(Position position){
         super.positionsHited.add(position);
@@ -12,10 +9,11 @@ public class Mine extends GameTool {
 
     @Override
     public String getShipDirection() {
-        return null;
+        return "Mine";
+
     }
 
-    public  Mine (String i_species , String i_type , char i_sign){
+    public  Mine (String i_species , String i_type , char i_sign , int i_row , int i_column){
         super( i_species, i_type , i_sign, 0 , 1);
     }
 }

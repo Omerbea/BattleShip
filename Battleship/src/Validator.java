@@ -143,20 +143,23 @@ public class Validator {
         return false ;
     }
 
-    private LinkedList<Postion> createListOfCoordinates(GameTool bship) {
+    private LinkedList<Postion> createListOfCoordinates(GameTool gameTool) {
 
         LinkedList<Postion> postionList = new LinkedList<>();
 
+        if(gameTool.getShipDirection().equals("Mine")) {
+            postionList.add(new Postion(gameTool.getRow() , gameTool.getColumn()));
+        }
+        else {
+            for (int i = 0; i < gameTool.getSize(); i++) {
+                if (gameTool.getShipDirection().equals("ROW")) {
+                    Postion p = new Postion(gameTool.getRow(), (gameTool.getColumn() + i));
+                    postionList.add(p);
 
-        for(int i = 0 ; i < bship.getSize() ; i++) {
-            if(bship.getShipDirection().equals("ROW")) {
-                Postion p = new Postion(bship.getRow() , (bship.getColumn() + i));
-                postionList.add(p);
-
-            }
-            else if (bship.getShipDirection().equals("COLUMN")) {
-                Postion p = new Postion((bship.getRow()+i) , bship.getColumn());
-                postionList.add(p);
+                } else if (gameTool.getShipDirection().equals("COLUMN")) {
+                    Postion p = new Postion((gameTool.getRow() + i), gameTool.getColumn());
+                    postionList.add(p);
+                }
             }
         }
 
