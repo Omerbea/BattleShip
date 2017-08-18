@@ -8,7 +8,7 @@ public abstract class GameTool {
     int score;
     private int row;
     private int column;
-    private int size;
+    int size;
     private boolean isAlive = true;
     ArrayList<Position>  positionsHited = new ArrayList<>();
 
@@ -18,7 +18,6 @@ public abstract class GameTool {
         sign = i_sign;
         score = i_score;
         size = i_size;
-
     }
 
     public void setAlive(boolean alive) {

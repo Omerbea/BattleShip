@@ -2,7 +2,7 @@ import java.util.ArrayList;
 
 final public class BattleShip extends GameTool {
 
-    private int size;
+
 
     private int score ;
     private String direction ;
