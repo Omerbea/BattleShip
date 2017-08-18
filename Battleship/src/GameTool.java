@@ -12,7 +12,7 @@ public abstract class GameTool {
     private boolean isAlive = true;
     ArrayList<Position>  positionsHited = new ArrayList<>();
 
-    public GameTool(String i_species, String i_type, char i_sign, int i_score, int i_size) {
+    public GameTool(String i_species, String i_type, char i_sign, int i_score, int i_size ) {
         species = i_species;
         type = i_type;
         sign = i_sign;

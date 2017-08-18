@@ -130,12 +130,22 @@ public class GameManager {
     private  boolean addMine (){
         while (true) {
             userInterface.printMassage("please insert coordinates ");
-            ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
-            if (players[whoPlay].setMine(coordinates.get(0), coordinates.get(1))){
-                backToMainMenu("set mine! lets kill the matherfaker!!!");
-                break;
+            Mine mine = new Mine("Mine");
+            try {
+                ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
+                mine.setCoordinates(coordinates.get(0), coordinates.get(1));
+                // check if mine can be set there
+                if (validator.canGameToolBePlaced(mine, players[whoPlay].myBoard)) {
+                    if (players[whoPlay].setMine(coordinates.get(0), coordinates.get(1))) {
+                        backToMainMenu("set mine! lets kill the matherfaker!!!");
+                        break;
+                    }
+                    userInterface.printMassage(" canot set Mine in these place. please insert new coordinates... ");
+                }
             }
-            userInterface.printMassage(" canot set Mine in these place. please insert new coordinates... ");
+            catch (Exception e){
+                userInterface.printMassage(e.getMessage());
+            }
         }
         return true;
     }
@@ -309,7 +319,7 @@ public class GameManager {
             return true;
         }
         catch (Exception e){
-            userInterface.printMassage(e.getMessage());
+            backToMainMenu(e.getMessage());
         }
 
 
