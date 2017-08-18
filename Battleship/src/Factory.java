@@ -2,7 +2,6 @@ import GameParser.BattleShipGame;
 import GameParser.BattleShipGame.Boards.Board.Ship;
 import GameParser.BattleShipGame.ShipTypes.ShipType;
 
-import java.util.ArrayList;
 import java.util.List;
 
 public class Factory {
@@ -38,40 +37,47 @@ public class Factory {
         return PlayersArray;
     }
 
-    private GameTool[][] initPlayerBoard(List<Ship> ships) {
+    private GameTool[][] initPlayerBoard(List<Ship> ships) throws Exception {
         int size = GameData.getBoardSize();
         int column = -1 , row = -1 ;
         GameTool[][] board = new GameTool[size][size];
 
+
         for(Ship ship : ships) {
             column = ship.getPosition().getX();
             row = ship.getPosition().getY();
-            setBoard(column , row ,board , ship.getDirection() , ship.getShipTypeId());
+            try {
+                setBoard(column, row, board, ship.getDirection(), ship.getShipTypeId());
+            } catch (Exception e) {
+                throw e ;
+            }
         }
         return board;
     }
 
-    private void setBoard(int column, int row, GameTool[][] board, String shipDirection, String shipTypeId) {
-        BattleShip bship = new BattleShip("Ship" ,shipTypeId ,getShipSizeByType(shipTypeId) , '#' , getScoreByShipTypeId(shipTypeId));
+    private void setBoard(int column, int row, GameTool[][] board, String shipDirection, String shipTypeId) throws Exception {
+        BattleShip bship = new BattleShip("Ship" ,shipTypeId ,getShipSizeByType(shipTypeId) , '#' , getScoreByShipTypeId(shipTypeId) , shipDirection);
         int numberOfIterations = 0;
         int tempCol = column ;
         int tempRow = row ;
+        bship.setCoordinates(row,column);
 
         if(shipDirection.equals("ROW")) {
-           for(; numberOfIterations < bship.getShipSize() ; numberOfIterations++ , tempCol++) {
-                   if (GameDataValidator.canShipCoordinateBePlaced(tempRow, tempCol)) {
-                       board[tempRow][tempCol] = bship;
-                   }
-           }
+                for (; numberOfIterations < bship.getSize(); numberOfIterations++, tempCol++) {
+                    board[tempRow][tempCol] = bship;
+                }
         }
 
         if(shipDirection.equals("COLUMN")) {
-            for( ; numberOfIterations < bship.getShipSize() ; numberOfIterations++ , tempRow++) {
-                if (GameDataValidator.canShipCoordinateBePlaced(tempRow, tempCol)) {
+                for( ; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempRow++) {
                     board[tempRow][tempCol] = bship;
-                }
             }
         }
+
+        if(!GameDataValidator.canGameToolBePlaced(bship , board)) {
+            throw new Exception("Problem placing : " + bship.getType() + " in board . \n row : " + bship.getRow() + " column : " + bship.getColumn() + " \n");
+        }
+
     }
 
     public int getScoreByShipTypeId(String id) {

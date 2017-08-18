@@ -72,7 +72,7 @@ public class GameManager {
                 input = this.userInterface.getMenuOption();
             } catch (Exception e) {
                 //send it to the console
-                System.out.println("Please enter number");
+                userInterface.printMassage("Please enter number");
             }
 
             switch (input) {
@@ -309,7 +309,7 @@ public class GameManager {
             return true;
         }
         catch (Exception e){
-            //TODO: handle with the exceptions
+            userInterface.printMassage(e.getMessage());
         }
 
 
