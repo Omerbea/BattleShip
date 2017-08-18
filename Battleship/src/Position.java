@@ -5,4 +5,12 @@ public class Position {
         row = i_row;
         column =  i_column;
     }
+
+    public int getColumn() {
+        return column;
+    }
+
+    public int getRow() {
+        return row;
+    }
 }

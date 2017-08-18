@@ -61,8 +61,6 @@ public class Player {
     private  boolean isAlive;
     private int size;
     private PlayerStatistics playerStatistics = new PlayerStatistics();
-    private int shipTypeBScore = 5;
-    private int shipTypeAScore = 10;
     public String getName() {
         return Name;
     }
@@ -163,11 +161,21 @@ public class Player {
         return true;
     }
 
-   public boolean updateHitMe (ArrayList<Integer> cooredinates){
+   public String updateHitMe (ArrayList<Integer> cooredinates){
+        /* update at my board where hit me  */
         Position position = new Position(cooredinates.get(0), cooredinates.get(1));
-        this.myBoard[cooredinates.get(0)][cooredinates.get(1)].updateHitMe(position);
-        //TODO : check if game over
-        return true;
+        this.myBoard[position.row][position.column].updateHitMe(position);
+        /*check if ship destroyed */
+        if (! this.myBoard[position.row][position.column].getIsAlive()){
+            numOfShip -= 1;
+            //check if game over
+            if (numOfShip == 0){
+                return "Game Over";
+            }
+            return "You destroyed a ship !!";
+
+        }
+        return "You hit in a ship! you have one more turn for that...";
     }
 
     public char [][] getMyBoardForPrint() {

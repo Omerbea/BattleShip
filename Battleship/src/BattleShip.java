@@ -23,6 +23,7 @@ final public class BattleShip extends GameTool {
         size--;
         positionsHited.add(position);
         if (size == 0){
+            super.setAlive(false);
             return true;
         }
         return false;

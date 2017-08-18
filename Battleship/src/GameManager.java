@@ -36,6 +36,7 @@ public class GameManager {
     private ArrayList<String> mainMenu = new ArrayList<>();
     private  boolean isGameRun = false;
     private  boolean isGameLoaded = false;
+    private boolean isGameOver = false;
     private  Factory factory ;
     private Player []players;
     private int whoPlay =0;
@@ -77,12 +78,10 @@ public class GameManager {
             switch (input) {
                 case 1:
                     if (this.loadGame()) {
-                        this.userInterface.printMassage("your file loaded...");
-                        try {
-                            TimeUnit.SECONDS.sleep(1);
-                        } catch (InterruptedException e) {
-                        }
-                        this.userInterface.printMenu(mainMenu, "middel");
+                        backToMainMenu("your file is loaded...");
+                    }
+                    else{
+                        userInterface.printMassage ("error");
                     }
 
                     break;
@@ -177,7 +176,7 @@ public class GameManager {
     private void backToMainMenu (String msg){
                 userInterface.printMassage(msg);
                 try {
-                    TimeUnit.SECONDS.sleep(1);
+                    TimeUnit.MILLISECONDS.sleep(500);
                 }
                 catch (InterruptedException e){
 
@@ -227,8 +226,11 @@ public class GameManager {
                 return true;
             case "Ship":
                 players[player].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1), factory.getScoreByShipTypeId(gameToolType.get(1)));
-                players[1-player].updateHitMe(coordinates);
-                backToMainMenu("You hit! your turn again...");
+                String msg = players[1-player].updateHitMe(coordinates);
+                if (msg == "Game Over"){
+                    this.finishTheGame();
+                }
+                backToMainMenu(msg);
                 return  true;
             case "Mine":
                 userInterface.printMassage( players[whoPlay].getName() +"You hit in Mine :/");
@@ -237,6 +239,13 @@ public class GameManager {
                 return true ;
              default: return false;
         }
+    }
+
+    private void  finishTheGame(){
+        this.isGameOver = true;
+        this.isGameLoaded =false;
+        this.isGameRun = false;
+        backToMainMenu("Well Done! you won... Game over");
     }
 
     private  boolean executeMine(ArrayList<Integer> coordinates){
