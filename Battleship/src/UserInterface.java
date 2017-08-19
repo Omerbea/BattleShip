@@ -34,17 +34,27 @@ public class UserInterface {
     }
 
     public  ArrayList <Integer> waitForCoordinates (){
-
+        boolean isCoordinatesAreGood = true;
         Scanner scanner = new Scanner(System.in);
-        int row = scanner.nextInt();
-        int column = scanner.next().charAt(0);
-        scanner.nextLine();
-
-        column -= 'A';
-
         ArrayList<Integer> coordinates = new ArrayList<Integer>();
-        coordinates.add(row);
-        coordinates.add(column);
+
+
+        while(isCoordinatesAreGood) {
+            try {
+                int row = scanner.nextInt();
+                int column = scanner.next().charAt(0);
+                scanner.nextLine();
+
+                column -= 'A';
+
+                coordinates.add(row);
+                coordinates.add(column);
+                isCoordinatesAreGood = false ;
+            } catch (Exception e) {
+                System.out.println("wrong input ! Please enter row space column");
+                scanner = new Scanner(System.in);
+            }
+        }
 
         return coordinates;
     }

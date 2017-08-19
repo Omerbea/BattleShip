@@ -62,20 +62,22 @@ public class Factory {
         int tempRow = row ;
         bship.setCoordinates(row,column);
 
-        if(shipDirection.equals("ROW")) {
-                for (; numberOfIterations < bship.getSize(); numberOfIterations++, tempCol++) {
-                    board[tempRow][tempCol] = bship;
-                }
-        }
-
-        if(shipDirection.equals("COLUMN")) {
-                for( ; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempRow++) {
-                    board[tempRow][tempCol] = bship;
-            }
-        }
 
         if(!GameDataValidator.canGameToolBePlaced(bship , board)) {
             throw new Exception("Problem placing : " + bship.getType() + " in board . \n row : " + bship.getRow() + " column : " + bship.getColumn() + " \n");
+        }
+
+
+        if(shipDirection.equals("ROW")) {
+            for (; numberOfIterations < bship.getSize(); numberOfIterations++, tempCol++) {
+                board[tempRow][tempCol] = bship;
+            }
+        }
+
+        if(shipDirection.equals("COLUMN")) {
+            for( ; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempRow++) {
+                board[tempRow][tempCol] = bship;
+            }
         }
 
     }

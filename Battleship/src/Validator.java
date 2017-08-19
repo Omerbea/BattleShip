@@ -95,15 +95,31 @@ public class Validator {
         return false ;
     }
 
-    public boolean canGameToolBePlaced(GameTool bship, GameTool[][] board) {
+    public boolean canGameToolBePlaced(GameTool bship, GameTool[][] board) throws Exception {
 
         LinkedList<Postion> listOfGameToolCoordinates = new LinkedList<>();
         listOfGameToolCoordinates = createListOfCoordinates(bship);
 
+        for(Postion p : listOfGameToolCoordinates) {
+            if(!isCordinateInRange(p.column)
+                    || !isCordinateInRange(p.getRow())) {
+                throw new Exception("Supplyed coordinates" + "(" + p.getRow() +","+p.getColumn() +")" +" are out of range ! ");
+
+            }
+        }
+
+        for(Postion p : listOfGameToolCoordinates) {
+            if(board[p.getRow()][p.getColumn()] != null) {
+              throw new Exception("There is already a game tool at " + "(" + p.getRow() + "," + p.getColumn() +")");
+            }
+        }
+
+
         //check if gametool can be placed
-        for (int i = 0; i < bship.getSize(); i++) {
-            if (isGameToolArroundCoordinate(bship.getRow(), bship.getColumn(), board , listOfGameToolCoordinates))
-                return false;
+        for(Postion p : listOfGameToolCoordinates) {
+            if(isGameToolArroundCoordinate(p.getRow(), p.getColumn(), board , listOfGameToolCoordinates)) {
+                throw new Exception("Should be one cell space from other gametools !");
+            }
         }
         return true;
     }
