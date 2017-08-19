@@ -86,7 +86,7 @@ public class Validator {
     }
 
 
-    private boolean isCordinateInRange(int cordinate) {
+    public boolean isCordinateInRange(int cordinate) {
 
         if(cordinate < boardsize &&
                 cordinate >= 0) {

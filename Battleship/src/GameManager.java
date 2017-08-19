@@ -133,8 +133,14 @@ public class GameManager {
             Mine mine = new Mine("Mine");
             try {
                 ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
+                if ( !validator.isCordinateInRange(coordinates.get(0)) || ! validator.isCordinateInRange((coordinates.get(1)))){
+                    userInterface.printMassage("the coordinates not in the range, please try anther coordinates in range...");
+                    continue;
+                }
+
                 mine.setCoordinates(coordinates.get(0), coordinates.get(1));
                 // check if mine can be set there
+
                 if (validator.canGameToolBePlaced(mine, players[whoPlay].myBoard)) {
                     if (players[whoPlay].setMine(coordinates.get(0), coordinates.get(1))) {
                         backToMainMenu("set mine! lets kill the matherfaker!!!");
@@ -207,6 +213,11 @@ public class GameManager {
         while (true) {
             startTime = System.nanoTime();
             coordinates = userInterface.waitForCoordinates();
+            if (! validator.isCordinateInRange(coordinates.get(0)) || ! validator.isCordinateInRange((coordinates.get(1))))
+            {
+                userInterface.printMassage(("your coordinates not in the range , please try again cooredinates are in range..."));
+                continue;
+            }
             finishTime = System.nanoTime();
             if (this.checkIfgGuessed (coordinates) == false){
                 break;
