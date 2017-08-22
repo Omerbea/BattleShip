@@ -7,10 +7,7 @@ import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
 import java.util.concurrent.TimeUnit;
-
-
 public class GameManager {
-
     class GameStatistic {
         int howManyTurn =0 ;
         long startTime = System.nanoTime();
@@ -26,7 +23,6 @@ public class GameManager {
                     TimeUnit.NANOSECONDS.toSeconds(timeNano) - TimeUnit.NANOSECONDS.toSeconds(TimeUnit.NANOSECONDS.toMinutes(timeNano)));
             return hms;
         }
-
         public  void incrementTurn (){
             howManyTurn += 1;
         }
@@ -47,8 +43,7 @@ public class GameManager {
         gameStatistic = new GameStatistic();
     }
 
-    public static void main(String [] args) throws Exception {
-
+    public static void main(String [] args) throws Exception{
         GameManager gameManager = new GameManager();
         gameManager.start();
     }
@@ -63,6 +58,7 @@ public class GameManager {
         this.mainMenu.add("add mine"); //7
         this.mainMenu.add("quit game"); //8
     }
+
     private void start() {
         this.userInterface.printMenu(mainMenu,"middle");
         int input = -1;
@@ -74,16 +70,13 @@ public class GameManager {
                 //send it to the console
                 userInterface.printMassage("Please enter number");
             }
-
             switch (input) {
                 case 1:
                     if (this.loadGame()) {
                         backToMainMenu("your file is loaded...");
                     }
                     else{
-                        userInterface.printMassage ("error");
                     }
-
                     break;
                 case 2:
                     this.gameStart();
@@ -109,11 +102,14 @@ public class GameManager {
                 default:
                     // send it to the console
                     System.out.println("Please choose number 1-7");
-
             }
         }
     }
+
     private boolean restartGame (){
+        if (! this.isGameRun){
+            backToMainMenu("cannot do restart because no game run..");
+        }
         userInterface.printMassage("restarting...");
         this.whoPlay=0;
         this.players = null;
@@ -123,11 +119,14 @@ public class GameManager {
         userInterface.printMassage(("restart successfully!"));
         this.userInterface.printMenu(mainMenu,"middle");
 
-
         return true;
-
     }
+
     private  boolean addMine (){
+        if (!this.isGameRun){
+            backToMainMenu("cannot add mine when no game run...");
+            return  false;
+        }
         while (true) {
             userInterface.printMassage("please insert coordinates ");
             Mine mine = new Mine("Mine");
@@ -197,13 +196,11 @@ public class GameManager {
                 userInterface.printMenu(this.mainMenu, "middel");
     }
 
-
     private  boolean executeMove() {
         if (!this.isGameRun) {
             this.backToMainMenu("no game run...");
             return false;
         }
-
         userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates. first row space and then colunm");
         long finishTime = 0;
         long startTime =0;
@@ -227,7 +224,7 @@ public class GameManager {
         players[whoPlay].setAvargeTimeTurn(deltaTime);
         gameStatistic.incrementTurn();
         ArrayList <String> gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
-        executeByTypeTool (gameToolType , coordinates , whoPlay);
+        executeByTypeTool (gameToolType , coordinates , whoPlay, false);
 
         return true;
     }
@@ -235,15 +232,23 @@ public class GameManager {
     private  boolean checkIfgGuessed(ArrayList<Integer> coordinates){
          return players[whoPlay].rivalBoard[coordinates.get(0)][ coordinates.get(1)] != 0;
     }
-    private boolean executeByTypeTool (ArrayList<String> gameToolType , ArrayList<Integer> coordinates , int player) {
+    private boolean executeByTypeTool (ArrayList<String> gameToolType , ArrayList<Integer> coordinates , int player, boolean mine) {
         switch (gameToolType.get(0)) {
             case "non":
                 players[player].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
                 this.changePlayer();
                 //userInterface.printMassage(("You miss :( "));
-                backToMainMenu("You miss :( ");
+                if (mine){
+                    backToMainMenu("player" + (player+1) + " your mine explode and miss");
+                }
+                else {
+                    backToMainMenu("You miss :( ");
+                }
                 return true;
             case "Ship":
+                if (mine){
+                    userInterface.printMassage("player " + (player +1) + " you mine hit in a ship! wall done!");
+                }
                 players[player].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1), factory.getScoreByShipTypeId(gameToolType.get(1)));
                 String msg = players[1-player].updateHitMe(coordinates);
                 if (msg == "Game Over"){
@@ -275,7 +280,7 @@ public class GameManager {
             userInterface.printMassage(players[ 1 - whoPlay].getName() + " your mine Hit at your mine arrival :/ ");
             return true;
         }
-        this.executeByTypeTool(gameToolType, coordinates ,1- whoPlay );
+        this.executeByTypeTool(gameToolType, coordinates ,1- whoPlay , true);
 
         return true;
     }
@@ -290,6 +295,7 @@ public class GameManager {
             //ERROR: the game not loaded.
             //TODO: implement return relevant massage
             backToMainMenu("game not loaded...");
+            return true;
         }
         this.isGameRun = true;
         this.showStatusGame();
