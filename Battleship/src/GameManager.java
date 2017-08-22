@@ -143,7 +143,7 @@ public class GameManager {
 
                 if (validator.canGameToolBePlaced(mine, players[whoPlay].myBoard)) {
                     if (players[whoPlay].setMine(coordinates.get(0), coordinates.get(1))) {
-                        backToMainMenu("set mine! lets kill the matherfaker!!!");
+                        backToMainMenu("set mine! ");
                         break;
                     }
                     userInterface.printMassage(" canot set Mine in these place. please insert new coordinates... ");
@@ -161,9 +161,6 @@ public class GameManager {
         userInterface.printMassage("Thank for you play with us... see you next time ;)");
         userInterface.printMassage("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         userInterface.printMassage("Quit!");
-
-
-        userInterface.printMassage("Quit Game...");
         return true;
     }
     private boolean showStatistic () {
@@ -204,6 +201,7 @@ public class GameManager {
     private  boolean executeMove() {
         if (!this.isGameRun) {
             this.backToMainMenu("no game run...");
+            return false;
         }
 
         userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates. first row space and then colunm");
@@ -254,7 +252,7 @@ public class GameManager {
                 backToMainMenu(msg);
                 return  true;
             case "Mine":
-                userInterface.printMassage( players[whoPlay].getName() +"You hit in Mine :/");
+                userInterface.printMassage( players[whoPlay].getName() +" You hit in Mine :/");
                 this.executeMine(coordinates);
                 backToMainMenu( "");
                 return true ;
