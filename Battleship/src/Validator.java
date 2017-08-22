@@ -57,34 +57,6 @@ public class Validator {
         return false ;
     }
 
-    public int[] ValidateUserMove(String move) throws Exception {
-
-        String []splittedMove = move.split("[ ]+");
-        int []cordinate = new int[2];
-        int index = 0 ;
-
-        // check if first element is ""
-        if(splittedMove[0].equals("")) {
-            index = 1;
-        }
-
-        try {
-            cordinate[ROW] = Integer.parseInt(splittedMove[index]);
-            cordinate[COLUMN] = Integer.parseInt(splittedMove[++index]);
-
-        } catch (Exception e) {
-            throw new Exception("Row and column must be number .");
-        }
-
-        if(!isCordinateInRange(cordinate[ROW]) ||
-                !isCordinateInRange(cordinate[COLUMN])) {
-            throw new Exception("Cordinate supplyed is out of range . ");
-
-        }
-
-        return cordinate;
-    }
-
 
     public boolean isCordinateInRange(int cordinate) {
 
