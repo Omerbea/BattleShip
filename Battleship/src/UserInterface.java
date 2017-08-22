@@ -5,7 +5,9 @@ public class UserInterface {
 
     private int boardSize = -1;
 
-
+    public void setBoardSize(int i_boardSize) {
+        boardSize = i_boardSize;
+    }
         /* PARAMS
      * optins: list of all the lines that should to present
      * style: where and how to menu should to present. for right now we support only 'middel' style
@@ -33,6 +35,49 @@ public class UserInterface {
         return  true;
     }
 
+    public ArrayList<Integer> ValidateUserMove(String move) throws Exception {
+
+        String []splittedMove = move.split("[ ]+");
+        ArrayList<Integer> result = new ArrayList<>();
+        int []cordinate = new int[2];
+        int index = 0 ;
+
+        int row = -1 ;
+        int column = -1;
+
+        if(move.isEmpty()) {
+            throw new Exception("Empty input is not valid.");
+        }
+        // check if first element is ""
+        if(splittedMove[0].equals("")) {
+            index = 1;
+        }
+
+        try {
+            row = Integer.parseInt(splittedMove[index]);
+            cordinate[0] = row ;
+        } catch (Exception e) {
+            throw new Exception("Row must be A number !");
+        }
+
+        try {
+            column = (splittedMove[index + 1].charAt(0) - 'A');
+
+            cordinate[1] = column ;
+            if(column < 0 || column > 22) {
+                throw new Exception("Column must be A Capital letter !");
+            }
+        } catch (Exception e) {
+           throw new Exception("Column must be A Capital letter !");
+        }
+
+        for (int j = 0; j < cordinate.length; j++)
+        {
+            result.add(cordinate[j]);
+        }
+        return result;
+    }
+
     public  ArrayList <Integer> waitForCoordinates (){
         boolean isCoordinatesAreGood = true;
         Scanner scanner = new Scanner(System.in);
@@ -41,17 +86,10 @@ public class UserInterface {
 
         while(isCoordinatesAreGood) {
             try {
-                int row = scanner.nextInt();
-                int column = scanner.next().charAt(0);
-                scanner.nextLine();
-
-                column -= 'A';
-
-                coordinates.add(row);
-                coordinates.add(column);
+                coordinates = ValidateUserMove(scanner.nextLine());
                 isCoordinatesAreGood = false ;
             } catch (Exception e) {
-                System.out.println("wrong input ! Please enter row space column");
+                System.out.println(e.getMessage());
                 scanner = new Scanner(System.in);
             }
         }
