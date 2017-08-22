@@ -330,8 +330,8 @@ public class GameManager {
             }
             this.players = factory.createPlayers();
             this.validator = factory.getGameDataValidator();
-            this.isGameLoaded = true;
             this.userInterface.setBoardSize(factory.GameData.getBoardSize());
+            this.isGameLoaded = true;
             return true;
         }
         catch (Exception e){
