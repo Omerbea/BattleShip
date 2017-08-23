@@ -54,6 +54,7 @@ public class Player {
         }
     }
 
+    int counterMine = 0;
     GameTool[][] myBoard ;
     char[][] rivalBoard ;
     String Name ;
@@ -112,6 +113,9 @@ public class Player {
         return result;
     }
 
+    public boolean iHaveMoreMine(){
+        return  (2 > this.counterMine);
+    }
 
     private  void updateStatisticsMyTurn (int row, int column, boolean iHit, String typeGameTool , int score){
         if (iHit){
@@ -139,6 +143,7 @@ public class Player {
         }
 
         this.myBoard[row][column] = new Mine("Mine");
+        this.counterMine += 11 ;
         return  true;
     }
 

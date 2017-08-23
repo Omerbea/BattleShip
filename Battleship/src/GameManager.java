@@ -127,6 +127,10 @@ public class GameManager {
             backToMainMenu("cannot add mine when no game run...");
             return  false;
         }
+        if (! players[whoPlay].iHaveMoreMine()){
+            backToMainMenu("You don't have anymore mines to set");
+            return false;
+        }
         while (true) {
             userInterface.printMassage("please insert coordinates ");
             Mine mine = new Mine("Mine");
@@ -273,6 +277,7 @@ public class GameManager {
     }
 
     private  boolean executeMine(ArrayList<Integer> coordinates){
+
         ArrayList <String> gameToolType = players[whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
         if (gameToolType.get(0) == "Mine"){
             players[whoPlay].rivalBoard[coordinates.get(0)][coordinates.get(1)] = '-';
@@ -304,7 +309,7 @@ public class GameManager {
         return  true;
     }
 
-        private boolean showStatusGame (){
+     private boolean showStatusGame (){
          if (! this.isGameRun){
              backToMainMenu("no game run...");
                 return false;
