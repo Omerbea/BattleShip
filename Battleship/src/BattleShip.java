@@ -14,8 +14,6 @@ final public class BattleShip extends GameTool {
     }
 
 
-
-
     /*return true if the ship distroyed*/
     @Override
     public boolean updateHitMe(Position position) {
