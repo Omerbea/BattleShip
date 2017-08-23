@@ -90,6 +90,7 @@ public class UserInterface {
                 isCoordinatesAreGood = false ;
             } catch (Exception e) {
                 System.out.println(e.getMessage());
+                System.out.println("Please try again !");
                 scanner = new Scanner(System.in);
             }
         }

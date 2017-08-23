@@ -205,7 +205,9 @@ public class GameManager {
             this.backToMainMenu("no game run...");
             return false;
         }
-        userInterface.printMassage( players[whoPlay].getName() + " please insert coordinates. first row space and then colunm");
+        userInterface.printMassage( players[whoPlay].getName() + " Please insert coordinates. Should be from the form : ");
+        userInterface.printMassage("Row(number) space column(capital letter)");
+        userInterface.printMassage("for example : 4 B");
         long finishTime = 0;
         long startTime =0;
         ArrayList<Integer> coordinates = null;

@@ -42,7 +42,6 @@ public class Factory {
         int column = -1 , row = -1 ;
         GameTool[][] board = new GameTool[size][size];
 
-
         for(Ship ship : ships) {
             column = ship.getPosition().getX();
             row = ship.getPosition().getY();
