@@ -127,9 +127,15 @@ public class UserInterface {
         System.out.println(name + " Board :");
         System.out.println();
         printTopRaw();
-        for (; row < boardSize; row++) {
+        for (row = 0; row < boardSize; row++) {
 
-            System.out.printf(Integer.toString(row ));
+            if(row >= 10) {
+                System.out.printf(Integer.toString(row));
+            } else {
+                System.out.printf(Integer.toString(row) + ' ');
+            }
+
+
             for (column = 0; column < boardSize; column++) {
                 System.out.printf(" %c", boardOne[row][column]);
             }
@@ -141,7 +147,13 @@ public class UserInterface {
         printTopRaw();
         for (row = 0; row < boardSize; row++) {
 
-            System.out.printf(Integer.toString(row));
+
+            if(row >= 10) {
+                System.out.printf(Integer.toString(row));
+            } else {
+                System.out.printf(Integer.toString(row) + ' ');
+            }
+
             for (column = 0; column < boardSize; column++) {
                 System.out.printf(" %c", boardTwo[row][column]);
             }
@@ -158,7 +170,7 @@ public class UserInterface {
 
     private void printTopRaw() {
 
-        String row = new String("  ");
+        String row = new String("   ");
         int rowEnd = boardSize + 65;
         char letter = 0;
 
