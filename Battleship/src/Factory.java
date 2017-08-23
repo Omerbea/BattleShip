@@ -9,8 +9,8 @@ public class Factory {
     BattleShipGame GameData;
     Validator GameDataValidator ;
 
-    Factory() throws Exception {
-        Parser parsedGame = new Parser();
+    Factory(String xmlPath) throws Exception {
+        Parser parsedGame = new Parser(xmlPath);
         GameData = parsedGame.GetParsedGame();
         GameDataValidator = new Validator(parsedGame.GetParsedGame().getBoardSize());
     }

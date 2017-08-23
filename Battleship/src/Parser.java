@@ -15,17 +15,17 @@ public class Parser {
         return ParsedGame;
     }
 
-    Parser() throws Exception {
-        ParseXML();
+    Parser(String xmlPath) throws Exception {
+        ParseXML(xmlPath);
     }
 
 
 
-    private void ParseXML() throws Exception {
+    private void ParseXML(String xmlPath) throws Exception {
         try {
-
-            String xmlPath = "resources\\battleShip_5_basic.xml";
-
+            if(xmlPath == null) {
+                throw new Exception("Please add path to xml file.");
+            }
             File file = new File(xmlPath);
 
             if(file.exists() && !file.isDirectory()) {

@@ -6,6 +6,7 @@ import sun.applet.Main;
 import java.lang.reflect.Array;
 import java.util.ArrayList;
 import java.util.List;
+import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
 public class GameManager {
     class GameStatistic {
@@ -72,7 +73,9 @@ public class GameManager {
             }
             switch (input) {
                 case 1:
-                    if (this.loadGame()) {
+                    userInterface.printMassage("Please Enter full path for xml file :");
+                    String xmlpath = new Scanner(System.in).nextLine();
+                    if (this.loadGame(xmlpath)) {
                         backToMainMenu("your file is loaded...");
                     }
                     else{
@@ -325,7 +328,7 @@ public class GameManager {
         return  true;
     }
 
-    private boolean loadGame (){
+    private boolean loadGame (String xmlPath){
         if ( this.isGameRun){
             //TODO: present error to the ui and back to the loop
             backToMainMenu("Game is already run... ");
@@ -333,7 +336,7 @@ public class GameManager {
         }
         try{
             if (this.factory == null) {
-                this.factory = new Factory();
+                this.factory = new Factory(xmlPath);
             }
             this.players = factory.createPlayers();
             this.validator = factory.getGameDataValidator();
