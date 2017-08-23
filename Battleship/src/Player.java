@@ -49,8 +49,9 @@ public class Player {
         public void incMissNum() {
             this.missNum += 1;      }
 
+        //NOTE: !!! we must to change this function for targil 2
         public void incScore(int inc) {
-            this.score += inc;
+            this.score += 1;
         }
     }
 
