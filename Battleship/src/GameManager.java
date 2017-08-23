@@ -160,8 +160,8 @@ public class GameManager {
     }
     private  boolean quiteGame(){
         userInterface.printMassage("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
-        userInterface.printMassage("Hope your enjoy:)");
-        userInterface.printMassage("Thank for you play with us... see you next time ;)");
+        userInterface.printMassage("Hope you enjoyed:)");
+        userInterface.printMassage("Thank you for playing... see you next time ;)");
         userInterface.printMassage("+++++++++++++++++++++++++++++++++++++++++++++++++++++++++");
         userInterface.printMassage("Quit!");
         return true;
