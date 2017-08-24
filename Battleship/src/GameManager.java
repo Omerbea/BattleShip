@@ -259,15 +259,16 @@ public class GameManager {
                     userInterface.printMassage("player " + (player +1) + " you mine hit in a ship! wall done!");
                 }
                 players[player].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(1), factory.getScoreByShipTypeId(gameToolType.get(1)));
-                String msg = players[1-player].updateHitMe(coordinates);
+                String msg = players[1-player].updateHitMe(coordinates , false);
                 if (msg == "Game Over"){
                     this.finishTheGame();
                 }
                 backToMainMenu(msg);
                 return  true;
             case "Mine":
+
                 userInterface.printMassage( players[whoPlay].getName() +" You hit in Mine :/");
-                this.executeMine(coordinates);
+                this.executeMine(coordinates, player);
                 backToMainMenu( "");
                 return true ;
              default: return false;
@@ -281,15 +282,21 @@ public class GameManager {
         backToMainMenu("Well Done! you won... Game over");
     }
 
-    private  boolean executeMine(ArrayList<Integer> coordinates){
+    private  boolean executeMine(ArrayList<Integer> coordinates, int player){
 
         ArrayList <String> gameToolType = players[whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
         if (gameToolType.get(0) == "Mine"){
-            players[whoPlay].rivalBoard[coordinates.get(0)][coordinates.get(1)] = '-';
-            players[1 - whoPlay].rivalBoard[coordinates.get(0)][coordinates.get(1)] = '-';
+            //players[whoPlay].rivalBoard[coordinates.get(0)][coordinates.get(1)] = '-';
+            //players[1 - whoPlay].rivalBoard[coordinates.get(0)][coordinates.get(1)] = '-';
+            players[whoPlay].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
+            players[ 1- whoPlay].updateIMissMyTurn(coordinates.get(0), coordinates.get(1));
+            players[whoPlay].updateHitMe(coordinates, true);
+            players[1- whoPlay].updateHitMe((coordinates), true);
             userInterface.printMassage(players[ 1 - whoPlay].getName() + " your mine Hit at your mine arrival :/ ");
             return true;
         }
+        players[whoPlay].updateIHitMyTurn(coordinates.get(0), coordinates.get(1), gameToolType.get(0), factory.getScoreByShipTypeId(gameToolType.get(0)));
+        players[1-whoPlay].updateHitMe(coordinates, true);
         this.executeByTypeTool(gameToolType, coordinates ,1- whoPlay , true);
 
         return true;

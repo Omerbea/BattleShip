@@ -167,7 +167,8 @@ public class Player {
         return true;
     }
 
-   public String updateHitMe (ArrayList<Integer> cooredinates){
+   public String updateHitMe (ArrayList<Integer> cooredinates, boolean isMine){
+
         /* update at my board where hit me  */
         Position position = new Position(cooredinates.get(0), cooredinates.get(1));
         this.myBoard[position.row][position.column].updateHitMe(position);
