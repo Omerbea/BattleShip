@@ -342,9 +342,7 @@ public class GameManager {
             return  false;
         }
         try{
-            if (this.factory == null) {
-                this.factory = new Factory(xmlPath);
-            }
+            this.factory = new Factory(xmlPath);
             this.players = factory.createPlayers();
             this.validator = factory.getGameDataValidator();
             this.userInterface.setBoardSize(factory.GameData.getBoardSize());
