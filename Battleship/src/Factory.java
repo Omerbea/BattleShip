@@ -73,8 +73,9 @@ public class Factory {
         }
 
         for(Ship ship : ships) {
-            column = ship.getPosition().getX();
-            row = ship.getPosition().getY();
+
+            row = ship.getPosition().getX();
+            column = ship.getPosition().getY();
             try {
                 setBoard(column, row, board, ship.getDirection(), ship.getShipTypeId());
             } catch (Exception e) {
