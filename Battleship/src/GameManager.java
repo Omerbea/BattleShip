@@ -70,7 +70,7 @@ public class GameManager {
             } catch (Exception e) {
                 //send it to the console
                 this.backToMainMenu("Please enter number");
-                return;
+                input = -1;
             }
             switch (input) {
                 case 1:
@@ -78,6 +78,7 @@ public class GameManager {
                     String xmlpath = new Scanner(System.in).nextLine();
                     if (this.loadGame(xmlpath)) {
                         backToMainMenu("your file is loaded...");
+
                     }
                     else{
                     }

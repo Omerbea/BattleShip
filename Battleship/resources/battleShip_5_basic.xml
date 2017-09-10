@@ -1,7 +1,7 @@
 <?xml version="1.0"?>
 <BattleShipGame xmlns:xsi="http://www.w3.org/2001/XMLSchema-instance" xsi:noNamespaceSchemaLocation="BattleShipGame.xsd">
     <GameType>BASIC</GameType>
-    <boardSize>6</boardSize>
+    <boardSize>5</boardSize>
     <shipTypes>
         <shipType id="shipTypeA">
             <category>REGULAR</category>
@@ -20,24 +20,24 @@
         <board>
             <ship>
                 <shipTypeId>shipTypeA</shipTypeId>
-                <position x="0" y="2" />
+                <position x="1" y="2" />
                 <direction>ROW</direction>
             </ship>
             <ship>
                 <shipTypeId>shipTypeB</shipTypeId>
-                <position x="4" y="4" />
+                <position x="3" y="3" />
                 <direction>COLUMN</direction>
             </ship>
         </board>
         <board>
             <ship>
                 <shipTypeId>shipTypeA</shipTypeId>
-                <position x="0" y="2" />
+                <position x="1" y="2" />
                 <direction>ROW</direction>
             </ship>
             <ship>
                 <shipTypeId>shipTypeB</shipTypeId>
-                <position x="4" y="4" />
+                <position x="3" y="3" />
                 <direction>COLUMN</direction>
             </ship>
         </board>
