@@ -64,8 +64,8 @@ public class UserInterface {
             column = (splittedMove[index + 1].charAt(0) - 'A');
 
             cordinate[1] = column ;
-            if(column < 0 || column > 22) {
-                throw new Exception("Column must be A Capital letter !");
+            if(column < 0 || column > 25) {
+                throw new Exception("Column must be A Capital letter ! inner");
             }
         } catch (Exception e) {
            throw new Exception("Column must be A Capital letter !");
@@ -130,7 +130,7 @@ public class UserInterface {
         printTopRaw();
         for (row = 0; row < boardSize; row++) {
 
-            if(row >= 10) {
+            if(row >= 9) {
                 System.out.printf(Integer.toString(row + 1));
             } else {
                 System.out.printf(Integer.toString(row + 1) + ' ');
@@ -149,7 +149,7 @@ public class UserInterface {
         for (row = 0; row < boardSize; row++) {
 
 
-            if(row >= 10) {
+            if(row >= 9) {
                 System.out.printf(Integer.toString(row + 1));
             } else {
                 System.out.printf(Integer.toString(row + 1) + ' ');
