@@ -155,7 +155,7 @@ public class Factory {
         int tempCol = column - 1 ;
         int tempRow = row - 1 ;
         boolean isFormatSupported = false ;
-        bship.setCoordinates(row,column);
+        bship.setCoordinates(row -  1,column);
 
 
         if(!GameDataValidator.canGameToolBePlaced(bship , board)) {
