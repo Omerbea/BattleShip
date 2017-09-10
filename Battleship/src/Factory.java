@@ -22,7 +22,7 @@ public class Factory {
     public Player[] createPlayers() throws Exception {
         //Validation pahse :
         try {
-            GameDataValidator.ValidateGameBoards(GameData.getBoards().getBoard());
+            GameDataValidator.ValidateShipTypes(GameData.getShipTypes().getShipType() , GameData.getBoards().getBoard());
         }
         catch (Exception e) {
             throw e ;
