@@ -73,7 +73,7 @@ public class Validator {
         for(Postion p : listOfGameToolCoordinates) {
             if(!isCordinateInRange(p.column)
                     || !isCordinateInRange(p.getRow())) {
-                throw new Exception("Supplyed coordinates" + "(" + p.getRow() +","+p.getColumn() +")" +" are out of range ! ");
+                throw new Exception("Supplyed coordinates" + "(" + (p.getRow()+1) +","+ (p.getColumn()+1) +")" +" for ship " + bship.getType() + " are out of range ! ");
 
             }
         }

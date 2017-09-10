@@ -155,11 +155,11 @@ public class Factory {
         int tempCol = column - 1 ;
         int tempRow = row - 1 ;
         boolean isFormatSupported = false ;
-        bship.setCoordinates(row -  1,column);
+        bship.setCoordinates(row -  1,column - 1);
 
 
         if(!GameDataValidator.canGameToolBePlaced(bship , board)) {
-            throw new Exception("Problem placing : " + bship.getType() + " in board . \n row : " + bship.getRow() + " column : " + bship.getColumn() + " \n");
+            throw new Exception("Problem placing : " + bship.getType() + " in board . \n row : " + (bship.getRow() + 1) + " column : " + (bship.getColumn() + 1) + " \n");
         }
 
 
