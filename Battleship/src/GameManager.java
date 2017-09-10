@@ -77,6 +77,7 @@ public class GameManager {
                 case 1:
                     if (this.isGameRun){
                         backToMainMenu("the game already run");
+
                     }
                     userInterface.printMassage("Please Enter full path for xml file :");
                     String xmlpath = new Scanner(System.in).nextLine();
@@ -325,6 +326,10 @@ public class GameManager {
             backToMainMenu("game not loaded...");
             return true;
         }
+        if (this.isGameRun){
+            backToMainMenu("game already run.");
+            return true;
+        }
         this.isGameRun = true;
         this.showStatusGame();
         //TODO: embuse of the function its not realy error
@@ -338,8 +343,7 @@ public class GameManager {
                 return false;
         }
         try {
-            userInterface.printMassage("game start...");
-            TimeUnit.MILLISECONDS.sleep(500);
+
             userInterface.printBaordsAndMenu(players[whoPlay].getName() ,players[whoPlay].getMyBoardForPrint(),players[whoPlay].getRivalBoard(), players[whoPlay].getScore(), this.mainMenu );
         }
         catch (Exception e){
