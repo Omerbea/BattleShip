@@ -131,9 +131,9 @@ public class UserInterface {
         for (row = 0; row < boardSize; row++) {
 
             if(row >= 10) {
-                System.out.printf(Integer.toString(row));
+                System.out.printf(Integer.toString(row + 1));
             } else {
-                System.out.printf(Integer.toString(row) + ' ');
+                System.out.printf(Integer.toString(row + 1) + ' ');
             }
 
 
@@ -150,9 +150,9 @@ public class UserInterface {
 
 
             if(row >= 10) {
-                System.out.printf(Integer.toString(row));
+                System.out.printf(Integer.toString(row + 1));
             } else {
-                System.out.printf(Integer.toString(row) + ' ');
+                System.out.printf(Integer.toString(row + 1) + ' ');
             }
 
             for (column = 0; column < boardSize; column++) {

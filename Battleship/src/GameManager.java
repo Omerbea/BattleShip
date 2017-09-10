@@ -218,11 +218,15 @@ public class GameManager {
         while (true) {
             startTime = System.nanoTime();
             coordinates = userInterface.waitForCoordinates();
+            //Fixing user row to start from 0
+            coordinates.set(0 , coordinates.get(0) - 1);
             if (! validator.isCordinateInRange(coordinates.get(0)) || ! validator.isCordinateInRange((coordinates.get(1))))
             {
-                userInterface.printMassage(("your coordinates not in the range , please try again cooredinates are in range..."));
+                userInterface.printMassage(("your coordinates not in the range , please try again with cooredinates that are in range..."));
                 continue;
             }
+
+
             finishTime = System.nanoTime();
             if (this.checkIfgGuessed (coordinates) == false){
                 break;
@@ -233,6 +237,7 @@ public class GameManager {
         long deltaTime = finishTime - startTime ;
         players[whoPlay].setAvargeTimeTurn(deltaTime);
         gameStatistic.incrementTurn();
+
         ArrayList <String> gameToolType = players[1- whoPlay].whoFindThere(coordinates.get(0), coordinates.get(1));
         executeByTypeTool (gameToolType , coordinates , whoPlay, false);
 
