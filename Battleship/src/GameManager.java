@@ -8,7 +8,7 @@ import java.util.ArrayList;
 import java.util.List;
 import java.util.Scanner;
 import java.util.concurrent.TimeUnit;
-//comment--
+//comment1--
 public class GameManager {
     class GameStatistic {
         int howManyTurn =0 ;
@@ -75,6 +75,9 @@ public class GameManager {
             }
             switch (input) {
                 case 1:
+                    if (this.isGameRun){
+                        backToMainMenu("the game already run");
+                    }
                     userInterface.printMassage("Please Enter full path for xml file :");
                     String xmlpath = new Scanner(System.in).nextLine();
                     if (this.loadGame(xmlpath)) {
@@ -335,6 +338,8 @@ public class GameManager {
                 return false;
         }
         try {
+            userInterface.printMassage("game start...");
+            TimeUnit.MILLISECONDS.sleep(500);
             userInterface.printBaordsAndMenu(players[whoPlay].getName() ,players[whoPlay].getMyBoardForPrint(),players[whoPlay].getRivalBoard(), players[whoPlay].getScore(), this.mainMenu );
         }
         catch (Exception e){
