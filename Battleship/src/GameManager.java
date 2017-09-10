@@ -69,7 +69,8 @@ public class GameManager {
                 input = this.userInterface.getMenuOption();
             } catch (Exception e) {
                 //send it to the console
-                userInterface.printMassage("Please enter number");
+                this.backToMainMenu("Please enter number");
+                return;
             }
             switch (input) {
                 case 1:
