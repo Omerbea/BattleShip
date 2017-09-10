@@ -291,7 +291,7 @@ public class GameManager {
         this.isGameOver = true;
         this.isGameLoaded =false;
         this.isGameRun = false;
-        backToMainMenu("Well Done! you won... Game over");
+        this.userInterface.printMassage("Well Done! you won");
     }
 
     private  boolean executeMine(ArrayList<Integer> coordinates, int player){
