@@ -177,6 +177,8 @@ public class Factory {
             isFormatSupported = true;
         }
 
+        //need to support advanced game
+
         if(!isFormatSupported){throw new Exception(shipDirection + " direction is not supported!");}
 
 
