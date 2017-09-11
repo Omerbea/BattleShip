@@ -144,7 +144,7 @@ public class Player {
         }
 
         this.myBoard[row][column] = new Mine("Mine");
-        this.counterMine += 11 ;
+        this.counterMine += 1 ;
         return  true;
     }
 

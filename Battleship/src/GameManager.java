@@ -77,7 +77,7 @@ public class GameManager {
                 case 1:
                     if (this.isGameRun){
                         backToMainMenu("the game already run");
-
+                        continue;
                     }
                     userInterface.printMassage("Please Enter full path for xml file :");
                     String xmlpath = new Scanner(System.in).nextLine();
@@ -144,7 +144,7 @@ public class GameManager {
         while (true) {
             userInterface.printMassage("please insert coordinates ");
             Mine mine = new Mine("Mine");
-            try {
+            try {   
                 ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
                 //Fixing user row to start from 0
                 coordinates.set(0 , coordinates.get(0) - 1);
