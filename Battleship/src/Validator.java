@@ -36,7 +36,7 @@ public class Validator {
 
         if(size < 5 ||
                 size > 20) {
-            throw new Exception("Board size MUST be <= 20 or >= 0");
+            throw new Exception("Board size MUST be <= 20 or >= 5");
         }
     }
 
