@@ -146,6 +146,8 @@ public class GameManager {
             Mine mine = new Mine("Mine");
             try {
                 ArrayList<Integer> coordinates = userInterface.waitForCoordinates();
+                //Fixing user row to start from 0
+                coordinates.set(0 , coordinates.get(0) - 1);
                 if ( !validator.isCordinateInRange(coordinates.get(0)) || ! validator.isCordinateInRange((coordinates.get(1)))){
                     userInterface.printMassage("the coordinates not in the range, please try anther coordinates in range...");
                     continue;
