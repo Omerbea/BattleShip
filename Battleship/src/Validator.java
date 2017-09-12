@@ -130,7 +130,7 @@ public class Validator {
     }
 
     private LinkedList<Postion> createListOfCoordinates(GameTool gameTool) {
-
+        //TODO : validate L ship
         LinkedList<Postion> postionList = new LinkedList<>();
 
         if(gameTool.getShipDirection().equals("Mine")) {

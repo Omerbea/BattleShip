@@ -176,6 +176,50 @@ public class Factory {
             }
             isFormatSupported = true;
         }
+        if(shipDirection.equals("UP_RIGHT")) {
+            for( ; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempCol++) {
+                board[tempRow][tempCol] = bship;
+            }
+            tempCol = column - 1;
+            for( numberOfIterations = 0; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempRow++) {
+                board[tempRow][tempCol] = bship;
+            }
+            isFormatSupported = true;
+        }
+
+        if(shipDirection.equals("DOWN_RIGHT")) {
+            for( ; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempCol++) {
+                board[tempRow][tempCol] = bship;
+            }
+            tempCol = column - 1;
+            for( numberOfIterations = 0; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempRow--) {
+                board[tempRow][tempCol] = bship;
+            }
+            isFormatSupported = true;
+        }
+
+        if(shipDirection.equals("RIGHT_UP")) {
+            for( ; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempCol--) {
+                board[tempRow][tempCol] = bship;
+            }
+            tempCol = column - 1;
+            for( numberOfIterations = 0; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempRow--) {
+                board[tempRow][tempCol] = bship;
+            }
+            isFormatSupported = true;
+        }
+
+        if(shipDirection.equals("RIGHT_DOWN")) {
+            for( ; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempCol--) {
+                board[tempRow][tempCol] = bship;
+            }
+            tempCol = column - 1;
+            for( numberOfIterations = 0; numberOfIterations < bship.getSize() ; numberOfIterations++ , tempRow++) {
+                board[tempRow][tempCol] = bship;
+            }
+            isFormatSupported = true;
+        }
+
 
         //need to support advanced game
 
